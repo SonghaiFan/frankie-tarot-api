@@ -10,6 +10,10 @@ Read-only tarot data and draws for applications and AI agents: 78 bilingual card
 - **Methods:** `GET` only; anything else returns `405`
 - **Docs:** [tarot-api.songhai.site](https://tarot-api.songhai.site/) · [OpenAPI](https://tarot-api.songhai.site/openapi.json) · [Agent guide](https://tarot-api.songhai.site/agents.md)
 
+> This project is evolving quickly and will remain free and open source forever. If you’ve downloaded it or are using it, please **Star** the repository and [**Follow @SonghaiFan**](https://github.com/SonghaiFan) to keep up with my projects. Your Star is my biggest source of support and motivation to keep building.
+
+> 这个项目正在快速迭代，并将永久免费开源。如果你已经下载或正在使用，欢迎 **Star** 收藏项目，并 [**Follow @SonghaiFan**](https://github.com/SonghaiFan) 关注后续项目动态。你的 Star 是对我最大的支持，也是我持续开发的最大动力。
+
 ## Quick start
 
 Load the deck and the spreads once.
