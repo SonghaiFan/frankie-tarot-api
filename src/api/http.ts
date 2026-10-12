@@ -51,7 +51,9 @@ export async function handleTarotApi(request: Request): Promise<Response> {
   if (request.method === "GET" && drawMatch) {
     const locale = z.enum(["en", "zh-CN"]).safeParse(url.searchParams.get("locale") ?? "zh-CN");
     if (!locale.success) return bad(400, "VALIDATION_ERROR", "locale must be en or zh-CN.");
-    const draw = drawSpread(decodeURIComponent(drawMatch[1]), locale.data, origin);
+    let spreadId: string;
+    try { spreadId = decodeURIComponent(drawMatch[1]); } catch { return bad(400, "INVALID_SPREAD_ID", "Spread ID is not valid URL encoding."); }
+    const draw = drawSpread(spreadId, locale.data, origin);
     return draw ? json(draw, 200, { "Cache-Control": "no-store" }) : bad(404, "SPREAD_NOT_FOUND", `No spread exists with ID '${drawMatch[1]}'.`);
   }
   if (/^\/api\/v1(?:\/|$)/.test(path)) {

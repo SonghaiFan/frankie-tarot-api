@@ -14,7 +14,8 @@
     "api:bundle": "node scripts/api-build.mjs",
     "api:test": "node --import tsx --test tests/*.test.ts",
     "mcp:agent": "node --import tsx mcp/agent-main.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "openapi:generate": "node --import tsx scripts/generate-openapi.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.32.0",
