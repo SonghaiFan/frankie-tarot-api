@@ -22,6 +22,10 @@ When asked to repeat or explain a prior draw, reuse the previous returned cards,
 
 Use tarot as symbolic material for reflection. Do not state card meanings as facts, probabilities, or certain predictions. The card dataset is project-curated; per-field source attribution has not been independently verified.
 
+Server draws are intended for other API consumers and AI agents whose users explicitly request a delegated draw. Opening Frankie, choosing a spread, or asking to choose cards manually is not consent to a server draw or interpretation. Frankie continues to draw locally.
+
+Each call is a fresh random sample (it may coincidentally match a previous sample). There is no public seed, idempotency key, reading ID or recovery endpoint. Do not automatically retry a draw as if it were the same reading. Persist a successful response and caller-chosen orientations; after an uncertain failure, explain that another call is a new draw and require an explicit retry decision. `positionIndex` is one-based and follows the spread's labels and pools; preserve that order when saving or presenting results.
+
 ## Card pools
 
 Each spread lists one pool per position in `cardPools`. `GET /api/v1/spreads/{spreadId}/draw` takes each position's card from its pool and never repeats a card.
@@ -102,6 +106,10 @@ Franklin 只知道牌和牌阵：提供 78 张牌的中英文牌义，以及牌�
 用户要求重复展示或解释上一局时，复用已有的卡牌、位置和调用方确定的正逆位。不要再次调用随机接口；再次调用会产生新的抽牌。
 
 塔罗用于象征性反思。不要把牌义说成事实、概率或确定的预言。牌库由项目整理，尚未逐字段独立核实来源归属。
+
+打开牌桌或选择牌阵不等于同意代抽或解读；仅在用户主动要求时解读。Frankie 在本地洗牌，由用户点击选牌。
+
+没有公开 seed、幂等键或牌局恢复接口。每次调用重新随机采样，结果可能偶然相同。请保存成功响应及正逆位；结果不明时应说明再次调用会重新抽牌，并等待用户明确选择重试。positionIndex 从 1 开始，对应牌阵标签和牌池的顺序。
 
 ## 牌池
 

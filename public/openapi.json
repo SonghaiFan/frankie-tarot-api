@@ -3,7 +3,7 @@
   "info": {
     "title": "Franklin Tarot API",
     "version": "1.0.0",
-    "description": "Read-only bilingual tarot catalog and spread definitions. Optional delegated draws respect per-position pools. Frankie owns manual selection and orientation. Only draw when the user explicitly delegates automatic drawing. A reading topic alone is not permission to replace manual selection. Use actual returned results; never fabricate cards after a failed or unexecuted call. Prefer imageUrls.redraw for artwork. Every request samples again: reuse saved results to repeat a reading. The caller owns orientation and interpretation; tarot is symbolic reflection, not factual prediction."
+    "description": "Read-only bilingual tarot catalog and spread definitions. Optional delegated draws respect per-position pools. Frankie owns manual selection and orientation. Only draw when the user explicitly delegates automatic drawing. A reading topic alone is not permission to replace manual selection. Use actual returned results; never fabricate cards after a failed or unexecuted call. Prefer imageUrls.redraw for artwork. Every request samples again: reuse saved results to repeat a reading. Opening Frankie or choosing a spread does not authorize drawing or interpretation. Interpret only after an explicit user request. No public seed, idempotency key or recovery endpoint exists. Retain successful results and orientations; after an uncertain failure require an explicit retry decision, since another call is a new draw and may coincidentally match. The caller owns orientation and interpretation; tarot is symbolic reflection, not factual prediction."
   },
   "servers": [
     {
@@ -161,7 +161,7 @@
     "/api/v1/cards/random": {
       "get": {
         "operationId": "getRandomTarotCards",
-        "description": "n distinct cards in random order. Only draw when the user explicitly delegates automatic drawing. A reading topic alone is not permission to replace manual selection. Use actual returned results; never fabricate cards after a failed or unexecuted call. Prefer imageUrls.redraw for artwork. Every request samples again: reuse saved results to repeat a reading. The caller owns orientation and interpretation; tarot is symbolic reflection, not factual prediction.",
+        "description": "n distinct cards in random order. Only draw when the user explicitly delegates automatic drawing. A reading topic alone is not permission to replace manual selection. Use actual returned results; never fabricate cards after a failed or unexecuted call. Prefer imageUrls.redraw for artwork. Every request samples again: reuse saved results to repeat a reading. Opening Frankie or choosing a spread does not authorize drawing or interpretation. Interpret only after an explicit user request. No public seed, idempotency key or recovery endpoint exists. Retain successful results and orientations; after an uncertain failure require an explicit retry decision, since another call is a new draw and may coincidentally match. The caller owns orientation and interpretation; tarot is symbolic reflection, not factual prediction.",
         "parameters": [
           {
             "name": "n",
@@ -453,7 +453,7 @@
     "/api/v1/spreads/{spreadId}/draw": {
       "get": {
         "operationId": "drawTarotSpread",
-        "description": "One unique card per one-based position, respecting its card pool. Only draw when the user explicitly delegates automatic drawing. A reading topic alone is not permission to replace manual selection. Use actual returned results; never fabricate cards after a failed or unexecuted call. Prefer imageUrls.redraw for artwork. Every request samples again: reuse saved results to repeat a reading. The caller owns orientation and interpretation; tarot is symbolic reflection, not factual prediction.",
+        "description": "One unique card per one-based position, respecting its card pool. Only draw when the user explicitly delegates automatic drawing. A reading topic alone is not permission to replace manual selection. Use actual returned results; never fabricate cards after a failed or unexecuted call. Prefer imageUrls.redraw for artwork. Every request samples again: reuse saved results to repeat a reading. Opening Frankie or choosing a spread does not authorize drawing or interpretation. Interpret only after an explicit user request. No public seed, idempotency key or recovery endpoint exists. Retain successful results and orientations; after an uncertain failure require an explicit retry decision, since another call is a new draw and may coincidentally match. The caller owns orientation and interpretation; tarot is symbolic reflection, not factual prediction.",
         "parameters": [
           {
             "name": "spreadId",

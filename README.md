@@ -226,6 +226,10 @@ curl "https://tarot-api.songhai.site/api/v1/spreads/COURT/draw?locale=en"
 }
 ```
 
+Server draws are intended for other API consumers and AI agents whose users explicitly request a delegated draw. Opening Frankie, choosing a spread, or asking to choose cards manually is not consent to a server draw or interpretation. Frankie continues to draw locally.
+
+Each call is a fresh random sample (it may coincidentally match a previous sample). There is no public seed, idempotency key, reading ID or recovery endpoint. Do not automatically retry a draw as if it were the same reading. Persist a successful response and caller-chosen orientations; after an uncertain failure, explain that another call is a new draw and require an explicit retry decision. `positionIndex` is one-based and follows the spread's labels and pools; preserve that order when saving or presenting results.
+
 ### Card pools
 
 | Pool | Cards |
@@ -312,6 +316,7 @@ curl https://tarot-api.songhai.site/mcp/agent \
 ### Agent behavior
 
 - Use actual successful REST/MCP results for card IDs, meanings, position labels, spread definitions, and artwork. Clearly distinguish your interpretation from the returned reference data
+- Interpret only after an explicit user request; opening the table or drawing cards alone does not request interpretation
 - Preserve the manual spread/card selection flow unless the user explicitly requests a delegated automatic draw. Neither the API nor MCP decides orientation; preserve the calling app's orientation choices
 - If the user asks to repeat or explain an existing draw, reuse the prior result and orientation. Calling a random endpoint again creates a new draw
 - If a call fails, is unavailable, or returns an error, say so. Do not invent cards, positions, meanings, or image URLs and present them as tool results
