@@ -105,3 +105,53 @@ test("agent MCP serves the same cards and spreads as REST", async () => {
     await server.close();
   }
 });
+
+test('REST and MCP draw contracts preserve every localized position without orientation', async () => {
+  const server = createAgentMcpServer(origin);
+  const client = new Client({ name: 'draw-contract-tests', version: '1.0.0' });
+  const [a, b] = InMemoryTransport.createLinkedPair();
+  await Promise.all([server.connect(b), client.connect(a)]);
+  try {
+    const tools = (await client.listTools()).tools;
+    for (const name of ['draw_tarot_spread', 'get_random_tarot_cards']) {
+      assert.equal(tools.find(tool => tool.name === name)?.annotations?.idempotentHint, false);
+    }
+    for (const locale of ['en', 'zh-CN'] as const) {
+      for (const spread of listSpreads(locale)) {
+        const response = await handleTarotApi(new Request(`${origin}/api/v1/spreads/${spread.id}/draw?locale=${locale}`));
+        assert.equal(response.status, 200);
+        assert.equal(response.headers.get('cache-control'), 'no-store');
+        const mcp = await client.callTool({ name: 'draw_tarot_spread', arguments: { spreadId: spread.id, locale } });
+        assert.ok(!mcp.isError);
+        for (const result of [await response.json(), mcp.structuredContent] as any[]) {
+          assert.equal(result.locale, locale);
+          assert.equal(result.spread.id, spread.id);
+          assert.equal(result.cards.length, spread.cardCount);
+          assert.equal(new Set(result.cards.map((item: any) => item.card.id)).size, spread.cardCount);
+          result.cards.forEach((item: any, index: number) => {
+            assert.equal(item.positionIndex, index + 1);
+            assert.equal(item.positionLabel, spread.labels[index]);
+            assert.equal(item.cardPool, spread.cardPools[index]);
+            assert.ok(isInPool(item.card, spread.cardPools[index]));
+            for (const value of [item, item.card]) {
+              assert.ok(!('orientation' in value));
+              assert.ok(!('isReversed' in value));
+            }
+          });
+        }
+      }
+    }
+    for (const args of [{spreadId:'AUTO'}, {spreadId:'SINGLE',locale:'fr'}]) {
+      assert.equal((await client.callTool({name:'draw_tarot_spread',arguments:args})).isError, true);
+    }
+    for (const [path, status, code] of [
+      ['/api/v1/spreads/SINGLE/draw?locale=fr',400,'VALIDATION_ERROR'],
+      ['/api/v1/spreads/AUTO/draw',404,'SPREAD_NOT_FOUND'],
+      ['/api/v1/spreads/%E0%A4%A/draw',400,'INVALID_SPREAD_ID'],
+    ] as const) {
+      const response = await handleTarotApi(new Request(`${origin}${path}`));
+      assert.equal(response.status, status);
+      assert.equal((await response.json() as any).error.code, code);
+    }
+  } finally { await client.close(); await server.close(); }
+});

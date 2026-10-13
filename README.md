@@ -7,7 +7,8 @@ Read-only tarot data and draws for applications and AI agents: 78 bilingual card
 - **Base URL:** `https://tarot-api.songhai.site`
 - **Auth:** none, no key required
 - **Locales:** `en`, `zh-CN` (pass `?locale=`, default `zh-CN`)
-- **Methods:** `GET` only; anything else returns `405`
+- **REST methods:** `GET` for data, `OPTIONS` for CORS preflight; other API methods return `405` (MCP uses its own Streamable HTTP transport)
+- **MCP endpoint:** `https://tarot-api.songhai.site/mcp/agent`
 - **Docs:** [tarot-api.songhai.site](https://tarot-api.songhai.site/) · [OpenAPI](https://tarot-api.songhai.site/openapi.json) · [Agent guide](https://tarot-api.songhai.site/agents.md)
 
 > This project is evolving quickly and will remain free and open source forever. If you’ve downloaded it or are using it, please **Star** the repository and [**Follow @SonghaiFan**](https://github.com/SonghaiFan) to keep up with my projects. Your Star is my biggest source of support and motivation to keep building.
@@ -30,7 +31,11 @@ cards.length;   // 78
 spreads.length; // 11
 ```
 
-Then draw a spread. Franklin picks one card per position from that position's pool, never repeating a card; your app decides upright or reversed:
+For a manual reading, let the user choose the spread and cards, then look up those cards. The independent Frankie Tarot app follows this manual flow and owns orientation and reading state.
+
+An automatic draw is optional: only call a random endpoint when the user explicitly delegates drawing to the app or agent, for example, “Draw three cards for me automatically.” “What is my fortune this week?” alone does not authorize automatic drawing. Ask how the user wants to choose cards first.
+
+For an explicitly delegated automatic spread draw, Franklin picks one card per position from that position's pool, never repeating a card; your app decides upright or reversed:
 
 ```js
 const draw = await fetch(`${API}/api/v1/spreads/COURT/draw?locale=en`).then((response) => response.json());
@@ -221,6 +226,10 @@ curl "https://tarot-api.songhai.site/api/v1/spreads/COURT/draw?locale=en"
 }
 ```
 
+Server draws are intended for other API consumers and AI agents whose users explicitly request a delegated draw. Opening Frankie, choosing a spread, or asking to choose cards manually is not consent to a server draw or interpretation. Frankie continues to draw locally.
+
+Each call is a fresh random sample (it may coincidentally match a previous sample). There is no public seed, idempotency key, reading ID or recovery endpoint. Do not automatically retry a draw as if it were the same reading. Persist a successful response and caller-chosen orientations; after an uncertain failure, explain that another call is a new draw and require an explicit retry decision. `positionIndex` is one-based and follows the spread's labels and pools; preserve that order when saving or presenting results.
+
 ### Card pools
 
 | Pool | Cards |
@@ -233,7 +242,7 @@ curl "https://tarot-api.songhai.site/api/v1/spreads/COURT/draw?locale=en"
 
 ### Images
 
-Every card has three artwork styles in `imageUrls`, as WebP served from the API origin. Images allow any origin (`Access-Control-Allow-Origin: *`) and are cached for a year as immutable; the `?v=` dataset version changes whenever the artwork does.
+Every card has three artwork styles in `imageUrls`, as WebP served from the API origin. Use the actual returned `imageUrls.redraw` by default; use another returned style only when requested. Do not construct replacement URLs or substitute unrelated artwork. Images allow any origin (`Access-Control-Allow-Origin: *`) and are cached for a year as immutable; the `?v=` version currently hashes card data, not image bytes. An artwork-only change therefore needs a separate cache-busting version strategy before release.
 
 ```html
 <img src="https://tarot-api.songhai.site/images/cards/maj00.webp?v=350d0b7d530942dd" alt="The Fool">
@@ -263,7 +272,7 @@ curl "https://tarot-api.songhai.site/api/v1/cards/random?n=0"
 | `404` | `CARD_NOT_FOUND` | No card has that ID, for example `/api/v1/cards/nope` |
 | `404` | `SPREAD_NOT_FOUND` | No spread has that ID, for example `/api/v1/spreads/NOPE/draw` |
 | `404` | `NOT_FOUND` | No route matches |
-| `405` | `METHOD_NOT_ALLOWED` | Any method other than `GET` |
+| `405` | `METHOD_NOT_ALLOWED` | Any method other than `GET`/`OPTIONS` on REST routes |
 
 ## Agent MCP
 
@@ -277,7 +286,9 @@ curl "https://tarot-api.songhai.site/api/v1/cards/random?n=0"
 | `list_tarot_spreads` | `locale` | `{ spreads, locale }` |
 | `draw_tarot_spread` | `spreadId`, `locale` | `{ spread, cards, locale }`, one card per position, without orientation |
 
-Connect it to an MCP client:
+Register the endpoint in your MCP client's server/connector settings. Linking this GitHub repository or mentioning the API in a prompt does **not** register an MCP server or make its tools available. If your client supports REST integrations instead, import the [OpenAPI schema](https://tarot-api.songhai.site/openapi.json) and use the production base URL above.
+
+Example MCP configuration (the exact setup UI/configuration varies by client):
 
 ```json
 {
@@ -287,7 +298,11 @@ Connect it to an MCP client:
 }
 ```
 
-Or call a tool directly:
+The table describes `structuredContent`. For compatibility, `get_tarot_card` returns `{ card }` in `structuredContent` but a **raw card object** serialized as JSON in its text content. The other four tools serialize their structured payload in text content. Preserve this distinction when parsing results.
+
+These five tools return card data and image URLs; do not assume a separate image tool exists or that your client renders URLs as images. Use the returned `imageUrls.redraw` in a client-supported image renderer, or provide the image link when inline display is unavailable.
+
+For a direct HTTP tool-call check:
 
 ```sh
 curl https://tarot-api.songhai.site/mcp/agent \
@@ -297,6 +312,28 @@ curl https://tarot-api.songhai.site/mcp/agent \
 ```
 
 `npm run mcp:agent` runs the same server over stdio.
+
+### Agent behavior
+
+- Use actual successful REST/MCP results for card IDs, meanings, position labels, spread definitions, and artwork. Clearly distinguish your interpretation from the returned reference data
+- Interpret only after an explicit user request; opening the table or drawing cards alone does not request interpretation
+- Preserve the manual spread/card selection flow unless the user explicitly requests a delegated automatic draw. Neither the API nor MCP decides orientation; preserve the calling app's orientation choices
+- If the user asks to repeat or explain an existing draw, reuse the prior result and orientation. Calling a random endpoint again creates a new draw
+- If a call fails, is unavailable, or returns an error, say so. Do not invent cards, positions, meanings, or image URLs and present them as tool results
+
+### Manual client evaluation checklist
+
+Protocol/schema tests establish API behavior; they do not establish whether a particular model selects tools correctly or renders images. Evaluate each connected client/model separately and record its version, actual tool calls, and observed output. Until that evaluation is run, model selection and image presentation remain unverified.
+
+- Confirm registration exposes all five tools at the production MCP endpoint; retrieve `maj00` and check both response shapes described above
+- Ask “What is my fortune this week?” and check that no random draw occurs without explicit delegation; check that manual spread/card selection and app-owned orientation remain intact
+- Ask “Draw the THREE spread for me automatically,” then check the returned positions/cards against the displayed reading and returned `imageUrls.redraw`; do not infer that an image was shown just because a URL exists
+- Ask to show the same draw again and verify no new random call occurs
+- Test an unknown card ID and an unavailable connection; verify an honest failure message without fabricated results
+
+## Contract maintenance
+
+`src/api/contracts.ts` defines shared Zod response schemas for MCP and OpenAPI. After changing a contract or example, run `npm run openapi:generate` and commit the updated `public/openapi.json`. `npm run api:test` rejects stale generated documentation and validates REST/MCP results against the schemas. REST single-card responses remain unwrapped.
 
 ## Run locally
 
@@ -322,7 +359,7 @@ node scripts/api-smoke.mjs http://127.0.0.1:3001
 
 One build serves documentation, REST, MCP, OpenAPI and card artwork. Vercel deploys the repository using its single `vercel.json`; GitHub Actions runs checks. See [deployment instructions](docs/api-deployment.md). `npm run dev` previews the documentation site while editing.
 
-The independent [Frankie Tarot app](https://github.com/SonghaiFan/frankie-tarot) is the reference consumer, live at [tarot.songhai.site](https://tarot.songhai.site). It loads cards and spreads and draws spreads over REST, then decides orientation itself. There are no sibling source imports or local path dependencies.
+The independent [Frankie Tarot app](https://github.com/SonghaiFan/frankie-tarot) is the reference consumer, live at [tarot.songhai.site](https://tarot.songhai.site). It loads card and spread references over REST, lets the user manually choose the spread and cards, and owns orientation and reading state. The optional random-draw endpoints do not describe or replace that manual workflow. There are no sibling source imports or local path dependencies.
 
 Only the v1 API and stable card IDs are supported.
 
