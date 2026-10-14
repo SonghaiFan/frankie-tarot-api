@@ -43,7 +43,7 @@ async function json(path, options, expected = 200) {
 const post = (body) => ({ method: "POST", headers: { "Content-Type": "application/json" }, body });
 const home = await request("/");
 assert.equal(home.status, 200, "Documentation homepage must be served directly");
-assert.match(await home.text(), /Franklin Tarot API/);
+assert.match(await home.text(), /Frankie Tarot API/);
 for (const path of ["/api/tarot/spreads", "/api/tarot/predict", "/api/v1/cards/0"]) {
   assert.equal((await request(path, path.endsWith("predict") ? post({}) : {})).status, 404, path);
 }

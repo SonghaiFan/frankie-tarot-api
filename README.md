@@ -1,4 +1,4 @@
-# Franklin Tarot API
+# Frankie Tarot API
 
 Read-only tarot data and draws for applications and AI agents: 78 bilingual cards (English and Simplified Chinese), 11 spread definitions with positions and card pools, and random spread draws. REST and the UI-free Agent MCP share one service implementation. Your app decides orientation and owns the reading; the service has no database and no model API dependency.
 
@@ -35,7 +35,7 @@ For a manual reading, let the user choose the spread and cards, then look up tho
 
 An automatic draw is optional: only call a random endpoint when the user explicitly delegates drawing to the app or agent, for example, “Draw three cards for me automatically.” “What is my fortune this week?” alone does not authorize automatic drawing. Ask how the user wants to choose cards first.
 
-For an explicitly delegated automatic spread draw, Franklin picks one card per position from that position's pool, never repeating a card; your app decides upright or reversed:
+For an explicitly delegated automatic spread draw, Frankie picks one card per position from that position's pool, never repeating a card; your app decides upright or reversed:
 
 ```js
 const draw = await fetch(`${API}/api/v1/spreads/COURT/draw?locale=en`).then((response) => response.json());
@@ -61,7 +61,7 @@ const reading = draw.cards.map(({ positionLabel, card }) => {
 | [`GET /api/v1/cards/random`](#random-cards) | `n` distinct random cards, without orientation |
 | [`GET /api/v1/spreads`](#spreads) | The 11 spreads with positions, labels and card pools |
 | [`GET /api/v1/spreads/{spreadId}/draw`](#draw-a-spread) | One random card per position, from each pool, without orientation |
-| `GET /health` | `{ "status": "ok", "service": "franklin-tarot-api", "apiVersion": "1" }` |
+| `GET /health` | `{ "status": "ok", "service": "frankie-tarot-api", "apiVersion": "1" }` |
 | `GET /openapi.json` | OpenAPI 3.1 schema |
 
 ### Get one card
@@ -293,7 +293,7 @@ Example MCP configuration (the exact setup UI/configuration varies by client):
 ```json
 {
   "mcpServers": {
-    "franklin-tarot": { "type": "http", "url": "https://tarot-api.songhai.site/mcp/agent" }
+    "frankie-tarot": { "type": "http", "url": "https://tarot-api.songhai.site/mcp/agent" }
   }
 }
 ```

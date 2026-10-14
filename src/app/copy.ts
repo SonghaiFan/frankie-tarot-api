@@ -19,7 +19,7 @@ export const COPY = {
   en: {
     nav: ["Overview", "Quickstart", "Endpoints", "Spreads", "Card pools", "MCP", "Errors"],
     onPage: "On this page",
-    asideNote: "Read-only REST and MCP. Franklin knows the cards and the spreads; your app owns the reading.",
+    asideNote: "Read-only REST and MCP. Frankie knows the cards and the spreads; your app owns the reading.",
     heroEyebrow: "REST API · MCP · Open source",
     heroDescription: "A read-only tarot service for apps and AI agents: 78 bilingual cards, real spreads with positions and card pools, and random spread draws. Your app decides orientation and owns the reading.",
     quickstart: "Quickstart", reference: "Reference", stats: ["Cards", "Spreads", "Locales"],
@@ -28,10 +28,10 @@ export const COPY = {
     auth: "None. No key required.", spreadChoice: "en or zh-CN, as ?locale=. Default zh-CN.",
     copied: "Copied", copy: "Copy",
     loadLabel: "1 · load the deck and spreads",
-    drawIntro: "Franklin draws one card per position from that position's pool, never repeating a card. Your app decides upright or reversed. Call only for an explicitly requested delegated draw; retries sample again, with no seed or idempotency key. Frankie keeps manual selection local:",
+    drawIntro: "Frankie draws one card per position from that position's pool, never repeating a card. Your app decides upright or reversed. Call only for an explicitly requested delegated draw; retries sample again, with no seed or idempotency key. Frankie keeps manual selection local:",
     drawResultLabel: "result",
     equivalentCurl: "Equivalent cURL request",
-    statelessNote: "Franklin does not store or interpret readings. Your app decides orientation and keeps the reading; tarot is for reflection, not factual prediction.",
+    statelessNote: "Frankie does not store or interpret readings. Your app decides orientation and keeps the reading; tarot is for reflection, not factual prediction.",
     endpointsTitle: "Reference", endpointsDescription: "Every endpoint is a GET with JSON out. The responses below are real output; “…” marks a shortened field.",
     endpointDescriptions: [
       "Service health check.",
@@ -71,7 +71,7 @@ export const COPY = {
   "zh-CN": {
     nav: ["概览", "快速开始", "接口", "牌阵", "牌池", "MCP", "错误"],
     onPage: "本页导航",
-    asideNote: "只读的 REST 与 MCP。Franklin 只知道牌和牌阵，牌局由你的应用负责。",
+    asideNote: "只读的 REST 与 MCP。Frankie 只知道牌和牌阵，牌局由你的应用负责。",
     heroEyebrow: "REST API · MCP · 开源",
     heroDescription: "为应用和 AI Agent 提供的只读塔罗服务：78 张中英文牌、含位置与牌池的真实牌阵，并按牌阵随机抽牌。正逆位和牌局由你的应用负责。",
     quickstart: "快速开始", reference: "接口参考", stats: ["张牌", "种牌阵", "种语言"],
@@ -80,10 +80,10 @@ export const COPY = {
     auth: "无需密钥。", spreadChoice: "en 或 zh-CN，用 ?locale= 指定，默认 zh-CN。",
     copied: "已复制", copy: "复制",
     loadLabel: "1 · 加载牌库和牌阵",
-    drawIntro: "Franklin 从每个位置的牌池里各抽一张，同一局不重复。正逆位由你的应用决定。仅在用户明确要求代抽时调用；没有 seed 或幂等键，重试会重新采样。Frankie 仍由用户在本地选牌：",
+    drawIntro: "Frankie 从每个位置的牌池里各抽一张，同一局不重复。正逆位由你的应用决定。仅在用户明确要求代抽时调用；没有 seed 或幂等键，重试会重新采样。Frankie 仍由用户在本地选牌：",
     drawResultLabel: "结果",
     equivalentCurl: "对应的 cURL 请求",
-    statelessNote: "Franklin 不保存牌局，也不做解读。正逆位和牌局状态由你的应用负责；塔罗用于反思，不用于确定性预测。",
+    statelessNote: "Frankie 不保存牌局，也不做解读。正逆位和牌局状态由你的应用负责；塔罗用于反思，不用于确定性预测。",
     endpointsTitle: "接口参考", endpointsDescription: "所有接口都是 GET，返回 JSON。下面的返回都是真实数据，“…”表示省略了部分内容。",
     endpointDescriptions: [
       "服务健康检查。",

@@ -194,7 +194,7 @@ export default function ApiDocsPage() {
       <header className="sticky top-0 z-30 border-b border-white/10 bg-[#030308]/85 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-[1240px] items-center justify-between px-5 lg:px-8">
           <a href="#overview" className="flex items-center gap-4 text-white/90">
-            <img src="/franklin.svg" alt="Franklin" className="h-6 w-[84px] object-contain brightness-0 invert opacity-90" />
+            <img src="/frankie.svg" alt="Frankie" className="h-6 w-[84px] object-contain brightness-0 invert opacity-90" />
             <span className="hidden border-l border-white/15 pl-4 text-[9px] font-light tracking-[0.42em] text-white/40 sm:block">API</span>
           </a>
           <nav className="hidden items-center gap-7 xl:flex">
@@ -204,7 +204,7 @@ export default function ApiDocsPage() {
           </nav>
           <div className="flex items-center gap-2">
             <button onClick={() => changeLocale(locale === "en" ? "zh-CN" : "en")} className="border border-white/15 px-3.5 py-2 text-[12px] tracking-wide text-neutral-300 transition-colors duration-300 hover:border-white/40 hover:text-white" aria-label={locale === "en" ? "切换到简体中文" : "Switch to English"}>{locale === "en" ? "中文" : "EN"}</button>
-            <a href="https://github.com/SonghaiFan/franklin-tarot-api" className="hidden items-center gap-2 border border-white/15 px-3.5 py-2 text-[12px] uppercase tracking-[0.12em] text-neutral-400 transition-colors duration-300 hover:border-white/40 hover:text-white sm:flex"><Github size={14} strokeWidth={1.25} /> GitHub</a>
+            <a href="https://github.com/SonghaiFan/frankie-tarot-api" className="hidden items-center gap-2 border border-white/15 px-3.5 py-2 text-[12px] uppercase tracking-[0.12em] text-neutral-400 transition-colors duration-300 hover:border-white/40 hover:text-white sm:flex"><Github size={14} strokeWidth={1.25} /> GitHub</a>
             <button onClick={() => setMenuOpen(!menuOpen)} className="grid size-9 place-items-center border border-white/15 text-white/70 xl:hidden" aria-label="Toggle navigation" aria-expanded={menuOpen}>
               {menuOpen ? <X size={15} strokeWidth={1.25} /> : <Menu size={15} strokeWidth={1.25} />}
             </button>
@@ -367,9 +367,9 @@ export default function ApiDocsPage() {
           </section>
 
           <footer className="flex flex-col gap-4 border-t border-white/10 pt-8 text-[9px] font-light uppercase tracking-[0.3em] text-neutral-600 sm:flex-row sm:items-center sm:justify-between">
-            <span>Franklin · MIT License</span>
+            <span>Frankie · MIT License</span>
             <span>{copy.footer[0]}</span>
-            <a className="inline-flex items-center gap-1.5 transition-colors duration-300 hover:text-white" href="https://github.com/SonghaiFan/franklin-tarot-api">{copy.footer[1]} <ArrowUpRight size={13} strokeWidth={1.5} /></a>
+            <a className="inline-flex items-center gap-1.5 transition-colors duration-300 hover:text-white" href="https://github.com/SonghaiFan/frankie-tarot-api">{copy.footer[1]} <ArrowUpRight size={13} strokeWidth={1.5} /></a>
           </footer>
         </div>
       </main>

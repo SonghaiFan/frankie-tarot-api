@@ -1,14 +1,14 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Franklin Tarot API",
+    "title": "Frankie Tarot API",
     "version": "1.0.0",
     "description": "Read-only bilingual tarot catalog and spread definitions. Optional delegated draws respect per-position pools. Frankie owns manual selection and orientation. Only draw when the user explicitly delegates automatic drawing. A reading topic alone is not permission to replace manual selection. Use actual returned results; never fabricate cards after a failed or unexecuted call. Prefer imageUrls.redraw for artwork. Every request samples again: reuse saved results to repeat a reading. Opening Frankie or choosing a spread does not authorize drawing or interpretation. Interpret only after an explicit user request. No public seed, idempotency key or recovery endpoint exists. Retain successful results and orientations; after an uncertain failure require an explicit retry decision, since another call is a new draw and may coincidentally match. The caller owns orientation and interpretation; tarot is symbolic reflection, not factual prediction."
   },
   "servers": [
     {
       "url": "https://tarot-api.songhai.site",
-      "description": "Public Franklin Tarot API"
+      "description": "Public Frankie Tarot API"
     }
   ],
   "paths": {
@@ -25,7 +25,7 @@
                 },
                 "example": {
                   "status": "ok",
-                  "service": "franklin-tarot-api",
+                  "service": "frankie-tarot-api",
                   "apiVersion": "1"
                 }
               }
@@ -104,9 +104,9 @@
                       "suit": null,
                       "rank": 0,
                       "imageUrls": {
-                        "redraw": "https://tarot-api.songhai.site/images/cards/maj00.webp?v=350d0b7d530942dd",
-                        "dreamy": "https://tarot-api.songhai.site/images/cards_dreamy/maj00.webp?v=350d0b7d530942dd",
-                        "original": "https://tarot-api.songhai.site/images/cards_rws_original/maj00.webp?v=350d0b7d530942dd"
+                        "redraw": "https://tarot-api.songhai.site/images/cards/maj00.webp?v=f4b3de1528456260",
+                        "dreamy": "https://tarot-api.songhai.site/images/cards_dreamy/maj00.webp?v=f4b3de1528456260",
+                        "original": "https://tarot-api.songhai.site/images/cards_rws_original/maj00.webp?v=f4b3de1528456260"
                       },
                       "keywords": {
                         "en": [
@@ -132,6 +132,16 @@
                       },
                       "meanings": {
                         "upright": {
+                          "en": "Folly, mania, extravagance, intoxication, delirium, frenzy, bewrayment.",
+                          "zh-CN": "愚行、躁狂、挥霍、醉态、谵妄、狂热、泄露或背叛。"
+                        },
+                        "reversed": {
+                          "en": "Negligence, absence, distribution, carelessness, apathy, nullity, vanity.",
+                          "zh-CN": "疏忽、缺席、分散、粗心、冷漠、空无、虚荣。"
+                        }
+                      },
+                      "modernMeanings": {
+                        "upright": {
                           "en": "Starting from zero; luck in gambling; unconventionality; pursuit of novel dreams; adventure; uninhibited living; an artist's temperament; out of the ordinary; striking directly at the key point or blind spot; a hunter in love; transcendent spiritual love; free love unconstrained by form",
                           "zh-CN": "从零开始; 好赌运; 不墨守成规; 追求新奇的梦想; 冒险; 放浪形骸; 艺术家的气质; 异于常人; 直攻要害、盲点; 爱情狩猎者; 精神上的超然之爱; 不拘形式的自由恋爱"
                         },
@@ -140,10 +150,35 @@
                           "zh-CN": "不安定; 孤注一掷会失败; 缺乏责任感; 损失; 脚跟站不稳; 堕落; 走错路; 行为乖张; 轻浮的恋情; 感情忽冷忽热; 不安定的爱情之旅; 疏忽; 虚无; 虚荣 "
                         }
                       },
+                      "pktSymbolism": null,
                       "source": {
+                        "pkt": {
+                          "id": "PKT-1911",
+                          "title": "The Pictorial Key to the Tarot",
+                          "author": "Arthur Edward Waite",
+                          "illustrator": "Pamela Colman Smith",
+                          "edition": "1911",
+                          "url": "https://tarot-api.songhai.site/resources/pkt.txt",
+                          "sha256": "dd7e239c0e6dbe313550279359bf0ffc9d61c3e2d2389eeb706d409088ef2b69",
+                          "translationNote": "Chinese entries are editorial summaries of the cited English passages, not an original Waite translation.",
+                          "references": {
+                            "upright": {
+                              "chapter": "III.3",
+                              "lineStart": 1644,
+                              "lineEnd": 1644
+                            },
+                            "reversed": {
+                              "chapter": "III.3",
+                              "lineStart": 1644,
+                              "lineEnd": 1644
+                            }
+                          },
+                          "basis": "historical-divinatory-meanings",
+                          "modernExtensionSource": "Previous project-curated interpretation; not attributed to Waite."
+                        },
                         "dataset": "frankie-tarot-ground-truth",
-                        "datasetVersion": "350d0b7d530942dd",
-                        "note": "Project-curated data. Per-field source attribution has not been independently verified."
+                        "datasetVersion": "f4b3de1528456260",
+                        "note": "Primary meanings: cited PKT 1911 English passages and editorial Chinese summaries. modernMeanings: preserved project-curated extensions. Keywords, descriptions and artistic variants are project-curated; their attribution is not claimed to be independently verified."
                       }
                     }
                   ],
@@ -207,9 +242,9 @@
                       "suit": null,
                       "rank": 0,
                       "imageUrls": {
-                        "redraw": "https://tarot-api.songhai.site/images/cards/maj00.webp?v=350d0b7d530942dd",
-                        "dreamy": "https://tarot-api.songhai.site/images/cards_dreamy/maj00.webp?v=350d0b7d530942dd",
-                        "original": "https://tarot-api.songhai.site/images/cards_rws_original/maj00.webp?v=350d0b7d530942dd"
+                        "redraw": "https://tarot-api.songhai.site/images/cards/maj00.webp?v=f4b3de1528456260",
+                        "dreamy": "https://tarot-api.songhai.site/images/cards_dreamy/maj00.webp?v=f4b3de1528456260",
+                        "original": "https://tarot-api.songhai.site/images/cards_rws_original/maj00.webp?v=f4b3de1528456260"
                       },
                       "keywords": {
                         "en": [
@@ -235,6 +270,16 @@
                       },
                       "meanings": {
                         "upright": {
+                          "en": "Folly, mania, extravagance, intoxication, delirium, frenzy, bewrayment.",
+                          "zh-CN": "愚行、躁狂、挥霍、醉态、谵妄、狂热、泄露或背叛。"
+                        },
+                        "reversed": {
+                          "en": "Negligence, absence, distribution, carelessness, apathy, nullity, vanity.",
+                          "zh-CN": "疏忽、缺席、分散、粗心、冷漠、空无、虚荣。"
+                        }
+                      },
+                      "modernMeanings": {
+                        "upright": {
                           "en": "Starting from zero; luck in gambling; unconventionality; pursuit of novel dreams; adventure; uninhibited living; an artist's temperament; out of the ordinary; striking directly at the key point or blind spot; a hunter in love; transcendent spiritual love; free love unconstrained by form",
                           "zh-CN": "从零开始; 好赌运; 不墨守成规; 追求新奇的梦想; 冒险; 放浪形骸; 艺术家的气质; 异于常人; 直攻要害、盲点; 爱情狩猎者; 精神上的超然之爱; 不拘形式的自由恋爱"
                         },
@@ -243,10 +288,35 @@
                           "zh-CN": "不安定; 孤注一掷会失败; 缺乏责任感; 损失; 脚跟站不稳; 堕落; 走错路; 行为乖张; 轻浮的恋情; 感情忽冷忽热; 不安定的爱情之旅; 疏忽; 虚无; 虚荣 "
                         }
                       },
+                      "pktSymbolism": null,
                       "source": {
+                        "pkt": {
+                          "id": "PKT-1911",
+                          "title": "The Pictorial Key to the Tarot",
+                          "author": "Arthur Edward Waite",
+                          "illustrator": "Pamela Colman Smith",
+                          "edition": "1911",
+                          "url": "https://tarot-api.songhai.site/resources/pkt.txt",
+                          "sha256": "dd7e239c0e6dbe313550279359bf0ffc9d61c3e2d2389eeb706d409088ef2b69",
+                          "translationNote": "Chinese entries are editorial summaries of the cited English passages, not an original Waite translation.",
+                          "references": {
+                            "upright": {
+                              "chapter": "III.3",
+                              "lineStart": 1644,
+                              "lineEnd": 1644
+                            },
+                            "reversed": {
+                              "chapter": "III.3",
+                              "lineStart": 1644,
+                              "lineEnd": 1644
+                            }
+                          },
+                          "basis": "historical-divinatory-meanings",
+                          "modernExtensionSource": "Previous project-curated interpretation; not attributed to Waite."
+                        },
                         "dataset": "frankie-tarot-ground-truth",
-                        "datasetVersion": "350d0b7d530942dd",
-                        "note": "Project-curated data. Per-field source attribution has not been independently verified."
+                        "datasetVersion": "f4b3de1528456260",
+                        "note": "Primary meanings: cited PKT 1911 English passages and editorial Chinese summaries. modernMeanings: preserved project-curated extensions. Keywords, descriptions and artistic variants are project-curated; their attribution is not claimed to be independently verified."
                       }
                     }
                   ],
@@ -308,9 +378,9 @@
                   "suit": null,
                   "rank": 0,
                   "imageUrls": {
-                    "redraw": "https://tarot-api.songhai.site/images/cards/maj00.webp?v=350d0b7d530942dd",
-                    "dreamy": "https://tarot-api.songhai.site/images/cards_dreamy/maj00.webp?v=350d0b7d530942dd",
-                    "original": "https://tarot-api.songhai.site/images/cards_rws_original/maj00.webp?v=350d0b7d530942dd"
+                    "redraw": "https://tarot-api.songhai.site/images/cards/maj00.webp?v=f4b3de1528456260",
+                    "dreamy": "https://tarot-api.songhai.site/images/cards_dreamy/maj00.webp?v=f4b3de1528456260",
+                    "original": "https://tarot-api.songhai.site/images/cards_rws_original/maj00.webp?v=f4b3de1528456260"
                   },
                   "keywords": {
                     "en": [
@@ -336,6 +406,16 @@
                   },
                   "meanings": {
                     "upright": {
+                      "en": "Folly, mania, extravagance, intoxication, delirium, frenzy, bewrayment.",
+                      "zh-CN": "愚行、躁狂、挥霍、醉态、谵妄、狂热、泄露或背叛。"
+                    },
+                    "reversed": {
+                      "en": "Negligence, absence, distribution, carelessness, apathy, nullity, vanity.",
+                      "zh-CN": "疏忽、缺席、分散、粗心、冷漠、空无、虚荣。"
+                    }
+                  },
+                  "modernMeanings": {
+                    "upright": {
                       "en": "Starting from zero; luck in gambling; unconventionality; pursuit of novel dreams; adventure; uninhibited living; an artist's temperament; out of the ordinary; striking directly at the key point or blind spot; a hunter in love; transcendent spiritual love; free love unconstrained by form",
                       "zh-CN": "从零开始; 好赌运; 不墨守成规; 追求新奇的梦想; 冒险; 放浪形骸; 艺术家的气质; 异于常人; 直攻要害、盲点; 爱情狩猎者; 精神上的超然之爱; 不拘形式的自由恋爱"
                     },
@@ -344,10 +424,35 @@
                       "zh-CN": "不安定; 孤注一掷会失败; 缺乏责任感; 损失; 脚跟站不稳; 堕落; 走错路; 行为乖张; 轻浮的恋情; 感情忽冷忽热; 不安定的爱情之旅; 疏忽; 虚无; 虚荣 "
                     }
                   },
+                  "pktSymbolism": null,
                   "source": {
+                    "pkt": {
+                      "id": "PKT-1911",
+                      "title": "The Pictorial Key to the Tarot",
+                      "author": "Arthur Edward Waite",
+                      "illustrator": "Pamela Colman Smith",
+                      "edition": "1911",
+                      "url": "https://tarot-api.songhai.site/resources/pkt.txt",
+                      "sha256": "dd7e239c0e6dbe313550279359bf0ffc9d61c3e2d2389eeb706d409088ef2b69",
+                      "translationNote": "Chinese entries are editorial summaries of the cited English passages, not an original Waite translation.",
+                      "references": {
+                        "upright": {
+                          "chapter": "III.3",
+                          "lineStart": 1644,
+                          "lineEnd": 1644
+                        },
+                        "reversed": {
+                          "chapter": "III.3",
+                          "lineStart": 1644,
+                          "lineEnd": 1644
+                        }
+                      },
+                      "basis": "historical-divinatory-meanings",
+                      "modernExtensionSource": "Previous project-curated interpretation; not attributed to Waite."
+                    },
                     "dataset": "frankie-tarot-ground-truth",
-                    "datasetVersion": "350d0b7d530942dd",
-                    "note": "Project-curated data. Per-field source attribution has not been independently verified."
+                    "datasetVersion": "f4b3de1528456260",
+                    "note": "Primary meanings: cited PKT 1911 English passages and editorial Chinese summaries. modernMeanings: preserved project-curated extensions. Keywords, descriptions and artistic variants are project-curated; their attribution is not claimed to be independently verified."
                   }
                 }
               }
@@ -376,6 +481,19 @@
                 "zh-CN"
               ],
               "default": "zh-CN"
+            }
+          },
+          {
+            "name": "revision",
+            "in": "query",
+            "description": "Use pkt-1911-v1 for PKT-adapted spread semantics; omitted means legacy for existing clients. Pin the returned definition for each reading.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "legacy",
+                "pkt-1911-v1"
+              ],
+              "default": "legacy"
             }
           }
         ],
@@ -425,6 +543,19 @@
                         "en": "\nThe One Card Draw\" .\n- Card 1: The Insight regarding the specific topic.\nSynthesis Goal: Do NOT answer with a simple 'Yes' or 'No'. Focus on the 'appropriateness' of the card drawn . Interpret the card as the specific attitude, perspective, or circumstance the seeker needs to be aware of right now to make the day or situation more rewarding .\n    ",
                         "zh-CN": "\n单张牌阵。\n- 牌 1:当下最重要的核心提示。\n综合目标:不要给简单的是/否结论。请解释这张牌所指向的关键态度、注意事项或行动方向,并与求问者问题直接关联。\n    "
                       },
+                      "interpretationProfile": {
+                        "id": "legacy-reflection-v1",
+                        "templates": {
+                          "en": "Role: You are a Grand Tarot Master and ancient sage. Your voice is poetic, emotionally intelligent, and grounded rather than theatrical. Interpret how the positions and cards interact, rather than listing dictionary meanings.\n\nTask: Interpret this exact reading in English. Use only the supplied cards, their positions and orientations. Do not draw again, invent additional cards, or make certain predictions. Treat tarot as reflection and possible directions, not fixed fate.\n\nSpread: {{spreadName}}\nSeeker's question: {{question}}\n\nPersonal context:\nYou are being opened in the seeker's usual AI assistant. When relevant, draw on what you already know about the person asking—their goals, recent circumstances, preferences, values and recurring patterns—from available conversation context or memory. Use that understanding to connect both the poetic reading and detailed analysis to their life, and make the practical advice fit their situation. Treat the person asking as the seeker unless they explicitly say they are asking for someone else. Use only information you actually have; do not invent personal history or imply access to unavailable memories. Treat older context as potentially outdated, distinguish known facts from interpretations, and ask a brief clarifying question when a missing detail would materially change the reading. Avoid bringing up unrelated sensitive details.\n\nSpread-specific interpretation rules:\n{{spreadInstructions}}\n\nCards drawn, in their actual spread order:\n{{cards}}\n\n{{previousInterpretation}}\n\nRespond in this order:\n\n1. Poetic reading\nWrite one cohesive paragraph of 130–180 words. Speak directly to “you”. Weave the whole spread into a fluid story connected to the question; do not use bullets or card-by-card numbering in this section. End with a short empowering line or mantra, without a label.\n\n2. Detailed analysis\nThen give a deeper, more detailed analysis, organized around this spread's structure and interpretation rules. Explain the central theme, relationships and tensions between positions, and the connections between cards. Support your reasoning with specific cards and positions. For a timeline or yearly spread, connect the periods and identify key transitions; for a decision or relationship spread, examine the relevant options or perspectives. Discuss hidden influences and offer concrete, realistic next steps linked to the question. Clear headings or bullets are welcome here; this section is not subject to the poetic paragraph's word limit.\n\nInterpretation guidelines:\n- Upright energy can be active, direct or clearly manifest.\n- Reversed does not automatically mean bad: consider blockage, delay, inner conflict, internalization or excess, in context.\n- Use the supplied meanings as reference, not as a script. Avoid generic textbook lists and unsupported claims.\n- Mention elemental harmony or tension only when it helps explain this reading.\n- Keep both sections coherent with the same cards and question. Start with the poetic reading, then continue into the detailed analysis.",
+                          "zh-CN": "角色：你是一位博学的塔罗解读者与古老智慧的讲述者。语气诗意、富有情感洞察，同时落在现实生活中，避免戏剧化。通过牌位与牌之间的相互作用解读整个牌阵，而不是逐张罗列字典牌义。\n\n任务：用简体中文解读这同一次牌局。只使用下面已经抽取并翻开的牌、实际牌位与正逆位；不要重新抽牌、补牌或杜撰其他牌，不作确定性预测。将塔罗作为反思与可能方向的启示，而不是固定命运。\n\n牌阵：{{spreadName}}\n问题：{{question}}\n\n结合你对发问人的了解：\n这段提示词是在发问人平时使用的 AI 助手中打开的。解读时，如与你已掌握的对话上下文或记忆相关，请结合你对发问人的目标、近期处境、偏好、价值观和长期行为模式的了解，让诗意解读、详细分析与现实建议更贴近这个人。除非明确说明是在替别人提问，否则将发问人视为这次解读的对象。只使用你真实已有的信息，不编造个人经历，也不暗示你能读取不可用的记忆；较早的背景可能已经变化，要区分已知事实与解读推测。若缺少会实质影响解读的关键信息，可以简短提问确认。不要牵入与本次问题无关的敏感细节。\n\n此牌阵的专属解读规则：\n{{spreadInstructions}}\n\n抽到的牌（按实际牌位顺序）：\n{{cards}}\n\n{{previousInterpretation}}\n\n请严格按以下顺序输出：\n\n一、诗意解读\n先写一段约 120–180 个中文字的完整段落，直接称呼“你”。结合问题，把整副牌编织成连贯、流动的故事或讯息；这一部分不要项目符号，也不要逐张编号解释。用一句简短、有力量的寄语收尾，不给寄语另加标签。\n\n二、详细分析\n接着给出更深入、更细致的分析，按当前牌阵的结构与专属解读规则组织内容。解释整体主题、不同牌位之间的联系与张力，以及牌与牌之间的隐藏联系，并用具体牌名与牌位支撑判断。时间线或年度牌阵要串联各阶段、指出关键转折；决策或关系牌阵要分析对应选项或双方视角。关注潜在影响因素，结合问题给出具体可行的现实建议与下一步行动。这里可以使用清晰的小标题或列表，不受前面诗意段落的字数限制。\n\n解读原则：\n- 正位可表示活跃、直接或已显现的能量。\n- 逆位不自动等于坏结果；结合语境考虑受阻、延迟、内在冲突、内化或过度。\n- 牌义参考用于辅助理解，不照抄成通用教材式清单，不作没有依据的断言。\n- 只有在有助于理解时才提及元素间的协调与冲突。\n- 两部分始终围绕同一组牌和同一个问题，先诗意解读，再进入详细分析。"
+                        }
+                      },
+                      "source": {
+                        "kind": "modern-extension",
+                        "label": "Legacy project-curated spread semantics, retained for existing readings.",
+                        "references": []
+                      },
+                      "datasetVersion": "350d0b7d530942dd",
                       "defaultQuestions": {
                         "en": [
                           "What do I need to pay attention to here?",
@@ -436,6 +567,68 @@
                           "今天采取什么样的态度最有用?",
                           "这个问题能带给我什么启示?"
                         ]
+                      },
+                      "legacyDefinition": {
+                        "id": "SINGLE",
+                        "name": "One Card Draw",
+                        "names": {
+                          "en": "One Card Draw",
+                          "zh-CN": "单张指引"
+                        },
+                        "description": "A simple and direct one-card reading. Instead of asking a strict yes-or-no question, try asking what you need to notice, shift, or understand right now.",
+                        "descriptions": {
+                          "en": "A simple and direct one-card reading. Instead of asking a strict yes-or-no question, try asking what you need to notice, shift, or understand right now.",
+                          "zh-CN": "这个牌阵是最简单直接的指引,只用到一张塔罗牌。\n建议避免单纯的\"是/否\"提问,而是用\"我需要注意什么...\"来获得更深层的当下指引。"
+                        },
+                        "cardCount": 1,
+                        "labels": [
+                          "Insight"
+                        ],
+                        "labelsByLocale": {
+                          "en": [
+                            "Insight"
+                          ],
+                          "zh-CN": [
+                            "核心启示"
+                          ]
+                        },
+                        "cardPools": [
+                          "FULL"
+                        ],
+                        "layout": {
+                          "type": "flex",
+                          "positions": null
+                        },
+                        "interpretationInstruction": "\nThe One Card Draw\" .\n- Card 1: The Insight regarding the specific topic.\nSynthesis Goal: Do NOT answer with a simple 'Yes' or 'No'. Focus on the 'appropriateness' of the card drawn . Interpret the card as the specific attitude, perspective, or circumstance the seeker needs to be aware of right now to make the day or situation more rewarding .\n    ",
+                        "interpretationInstructions": {
+                          "en": "\nThe One Card Draw\" .\n- Card 1: The Insight regarding the specific topic.\nSynthesis Goal: Do NOT answer with a simple 'Yes' or 'No'. Focus on the 'appropriateness' of the card drawn . Interpret the card as the specific attitude, perspective, or circumstance the seeker needs to be aware of right now to make the day or situation more rewarding .\n    ",
+                          "zh-CN": "\n单张牌阵。\n- 牌 1:当下最重要的核心提示。\n综合目标:不要给简单的是/否结论。请解释这张牌所指向的关键态度、注意事项或行动方向,并与求问者问题直接关联。\n    "
+                        },
+                        "interpretationProfile": {
+                          "id": "legacy-reflection-v1",
+                          "templates": {
+                            "en": "Role: You are a Grand Tarot Master and ancient sage. Your voice is poetic, emotionally intelligent, and grounded rather than theatrical. Interpret how the positions and cards interact, rather than listing dictionary meanings.\n\nTask: Interpret this exact reading in English. Use only the supplied cards, their positions and orientations. Do not draw again, invent additional cards, or make certain predictions. Treat tarot as reflection and possible directions, not fixed fate.\n\nSpread: {{spreadName}}\nSeeker's question: {{question}}\n\nPersonal context:\nYou are being opened in the seeker's usual AI assistant. When relevant, draw on what you already know about the person asking—their goals, recent circumstances, preferences, values and recurring patterns—from available conversation context or memory. Use that understanding to connect both the poetic reading and detailed analysis to their life, and make the practical advice fit their situation. Treat the person asking as the seeker unless they explicitly say they are asking for someone else. Use only information you actually have; do not invent personal history or imply access to unavailable memories. Treat older context as potentially outdated, distinguish known facts from interpretations, and ask a brief clarifying question when a missing detail would materially change the reading. Avoid bringing up unrelated sensitive details.\n\nSpread-specific interpretation rules:\n{{spreadInstructions}}\n\nCards drawn, in their actual spread order:\n{{cards}}\n\n{{previousInterpretation}}\n\nRespond in this order:\n\n1. Poetic reading\nWrite one cohesive paragraph of 130–180 words. Speak directly to “you”. Weave the whole spread into a fluid story connected to the question; do not use bullets or card-by-card numbering in this section. End with a short empowering line or mantra, without a label.\n\n2. Detailed analysis\nThen give a deeper, more detailed analysis, organized around this spread's structure and interpretation rules. Explain the central theme, relationships and tensions between positions, and the connections between cards. Support your reasoning with specific cards and positions. For a timeline or yearly spread, connect the periods and identify key transitions; for a decision or relationship spread, examine the relevant options or perspectives. Discuss hidden influences and offer concrete, realistic next steps linked to the question. Clear headings or bullets are welcome here; this section is not subject to the poetic paragraph's word limit.\n\nInterpretation guidelines:\n- Upright energy can be active, direct or clearly manifest.\n- Reversed does not automatically mean bad: consider blockage, delay, inner conflict, internalization or excess, in context.\n- Use the supplied meanings as reference, not as a script. Avoid generic textbook lists and unsupported claims.\n- Mention elemental harmony or tension only when it helps explain this reading.\n- Keep both sections coherent with the same cards and question. Start with the poetic reading, then continue into the detailed analysis.",
+                            "zh-CN": "角色：你是一位博学的塔罗解读者与古老智慧的讲述者。语气诗意、富有情感洞察，同时落在现实生活中，避免戏剧化。通过牌位与牌之间的相互作用解读整个牌阵，而不是逐张罗列字典牌义。\n\n任务：用简体中文解读这同一次牌局。只使用下面已经抽取并翻开的牌、实际牌位与正逆位；不要重新抽牌、补牌或杜撰其他牌，不作确定性预测。将塔罗作为反思与可能方向的启示，而不是固定命运。\n\n牌阵：{{spreadName}}\n问题：{{question}}\n\n结合你对发问人的了解：\n这段提示词是在发问人平时使用的 AI 助手中打开的。解读时，如与你已掌握的对话上下文或记忆相关，请结合你对发问人的目标、近期处境、偏好、价值观和长期行为模式的了解，让诗意解读、详细分析与现实建议更贴近这个人。除非明确说明是在替别人提问，否则将发问人视为这次解读的对象。只使用你真实已有的信息，不编造个人经历，也不暗示你能读取不可用的记忆；较早的背景可能已经变化，要区分已知事实与解读推测。若缺少会实质影响解读的关键信息，可以简短提问确认。不要牵入与本次问题无关的敏感细节。\n\n此牌阵的专属解读规则：\n{{spreadInstructions}}\n\n抽到的牌（按实际牌位顺序）：\n{{cards}}\n\n{{previousInterpretation}}\n\n请严格按以下顺序输出：\n\n一、诗意解读\n先写一段约 120–180 个中文字的完整段落，直接称呼“你”。结合问题，把整副牌编织成连贯、流动的故事或讯息；这一部分不要项目符号，也不要逐张编号解释。用一句简短、有力量的寄语收尾，不给寄语另加标签。\n\n二、详细分析\n接着给出更深入、更细致的分析，按当前牌阵的结构与专属解读规则组织内容。解释整体主题、不同牌位之间的联系与张力，以及牌与牌之间的隐藏联系，并用具体牌名与牌位支撑判断。时间线或年度牌阵要串联各阶段、指出关键转折；决策或关系牌阵要分析对应选项或双方视角。关注潜在影响因素，结合问题给出具体可行的现实建议与下一步行动。这里可以使用清晰的小标题或列表，不受前面诗意段落的字数限制。\n\n解读原则：\n- 正位可表示活跃、直接或已显现的能量。\n- 逆位不自动等于坏结果；结合语境考虑受阻、延迟、内在冲突、内化或过度。\n- 牌义参考用于辅助理解，不照抄成通用教材式清单，不作没有依据的断言。\n- 只有在有助于理解时才提及元素间的协调与冲突。\n- 两部分始终围绕同一组牌和同一个问题，先诗意解读，再进入详细分析。"
+                          }
+                        },
+                        "source": {
+                          "kind": "modern-extension",
+                          "label": "Legacy project-curated spread semantics, retained for existing readings.",
+                          "references": []
+                        },
+                        "datasetVersion": "350d0b7d530942dd",
+                        "defaultQuestions": {
+                          "en": [
+                            "What do I need to pay attention to here?",
+                            "What attitude would serve me best today?",
+                            "What insight is this situation offering me?"
+                          ],
+                          "zh-CN": [
+                            "关于这件事,我需要留意什么?",
+                            "今天采取什么样的态度最有用?",
+                            "这个问题能带给我什么启示?"
+                          ]
+                        }
                       }
                     }
                   ],
@@ -490,6 +683,19 @@
               ],
               "default": "zh-CN"
             }
+          },
+          {
+            "name": "revision",
+            "in": "query",
+            "description": "Use pkt-1911-v1 for PKT-adapted spread semantics; omitted means legacy for existing clients. Pin the returned definition for each reading.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "legacy",
+                "pkt-1911-v1"
+              ],
+              "default": "legacy"
+            }
           }
         ],
         "responses": {
@@ -522,9 +728,9 @@
                         "suit": null,
                         "rank": 0,
                         "imageUrls": {
-                          "redraw": "https://tarot-api.songhai.site/images/cards/maj00.webp?v=350d0b7d530942dd",
-                          "dreamy": "https://tarot-api.songhai.site/images/cards_dreamy/maj00.webp?v=350d0b7d530942dd",
-                          "original": "https://tarot-api.songhai.site/images/cards_rws_original/maj00.webp?v=350d0b7d530942dd"
+                          "redraw": "https://tarot-api.songhai.site/images/cards/maj00.webp?v=f4b3de1528456260",
+                          "dreamy": "https://tarot-api.songhai.site/images/cards_dreamy/maj00.webp?v=f4b3de1528456260",
+                          "original": "https://tarot-api.songhai.site/images/cards_rws_original/maj00.webp?v=f4b3de1528456260"
                         },
                         "keywords": {
                           "en": [
@@ -550,6 +756,16 @@
                         },
                         "meanings": {
                           "upright": {
+                            "en": "Folly, mania, extravagance, intoxication, delirium, frenzy, bewrayment.",
+                            "zh-CN": "愚行、躁狂、挥霍、醉态、谵妄、狂热、泄露或背叛。"
+                          },
+                          "reversed": {
+                            "en": "Negligence, absence, distribution, carelessness, apathy, nullity, vanity.",
+                            "zh-CN": "疏忽、缺席、分散、粗心、冷漠、空无、虚荣。"
+                          }
+                        },
+                        "modernMeanings": {
+                          "upright": {
                             "en": "Starting from zero; luck in gambling; unconventionality; pursuit of novel dreams; adventure; uninhibited living; an artist's temperament; out of the ordinary; striking directly at the key point or blind spot; a hunter in love; transcendent spiritual love; free love unconstrained by form",
                             "zh-CN": "从零开始; 好赌运; 不墨守成规; 追求新奇的梦想; 冒险; 放浪形骸; 艺术家的气质; 异于常人; 直攻要害、盲点; 爱情狩猎者; 精神上的超然之爱; 不拘形式的自由恋爱"
                           },
@@ -558,10 +774,35 @@
                             "zh-CN": "不安定; 孤注一掷会失败; 缺乏责任感; 损失; 脚跟站不稳; 堕落; 走错路; 行为乖张; 轻浮的恋情; 感情忽冷忽热; 不安定的爱情之旅; 疏忽; 虚无; 虚荣 "
                           }
                         },
+                        "pktSymbolism": null,
                         "source": {
+                          "pkt": {
+                            "id": "PKT-1911",
+                            "title": "The Pictorial Key to the Tarot",
+                            "author": "Arthur Edward Waite",
+                            "illustrator": "Pamela Colman Smith",
+                            "edition": "1911",
+                            "url": "https://tarot-api.songhai.site/resources/pkt.txt",
+                            "sha256": "dd7e239c0e6dbe313550279359bf0ffc9d61c3e2d2389eeb706d409088ef2b69",
+                            "translationNote": "Chinese entries are editorial summaries of the cited English passages, not an original Waite translation.",
+                            "references": {
+                              "upright": {
+                                "chapter": "III.3",
+                                "lineStart": 1644,
+                                "lineEnd": 1644
+                              },
+                              "reversed": {
+                                "chapter": "III.3",
+                                "lineStart": 1644,
+                                "lineEnd": 1644
+                              }
+                            },
+                            "basis": "historical-divinatory-meanings",
+                            "modernExtensionSource": "Previous project-curated interpretation; not attributed to Waite."
+                          },
                           "dataset": "frankie-tarot-ground-truth",
-                          "datasetVersion": "350d0b7d530942dd",
-                          "note": "Project-curated data. Per-field source attribution has not been independently verified."
+                          "datasetVersion": "f4b3de1528456260",
+                          "note": "Primary meanings: cited PKT 1911 English passages and editorial Chinese summaries. modernMeanings: preserved project-curated extensions. Keywords, descriptions and artistic variants are project-curated; their attribution is not claimed to be independently verified."
                         }
                       }
                     },
@@ -580,9 +821,9 @@
                         "suit": null,
                         "rank": 1,
                         "imageUrls": {
-                          "redraw": "https://tarot-api.songhai.site/images/cards/maj01.webp?v=350d0b7d530942dd",
-                          "dreamy": "https://tarot-api.songhai.site/images/cards_dreamy/maj01.webp?v=350d0b7d530942dd",
-                          "original": "https://tarot-api.songhai.site/images/cards_rws_original/maj01.webp?v=350d0b7d530942dd"
+                          "redraw": "https://tarot-api.songhai.site/images/cards/maj01.webp?v=f4b3de1528456260",
+                          "dreamy": "https://tarot-api.songhai.site/images/cards_dreamy/maj01.webp?v=f4b3de1528456260",
+                          "original": "https://tarot-api.songhai.site/images/cards_rws_original/maj01.webp?v=f4b3de1528456260"
                         },
                         "keywords": {
                           "en": [
@@ -606,6 +847,16 @@
                         },
                         "meanings": {
                           "upright": {
+                            "en": "Skill, diplomacy, address, subtlety; sickness, pain, loss, disaster, snares of enemies; self-confidence, will; the Querent, if male.",
+                            "zh-CN": "技巧、外交手腕、应对与机巧；也包括疾病、痛苦、损失、灾难、敌人的圈套；自信与意志；旧文亦以此指男性求问者。"
+                          },
+                          "reversed": {
+                            "en": "Physician, Magus, mental disease, disgrace, disquiet.",
+                            "zh-CN": "医师、术士、精神疾病、失誉、不安。"
+                          }
+                        },
+                        "modernMeanings": {
+                          "upright": {
                             "en": "A good beginning; originality; growth potential; success for a new plan; rich imagination or good ideas; the start of a romance; a well-matched partner; the arrival of a new lover; someone worthy of emulation appears; skill; diplomacy; address; subtlety; confidence; will",
                             "zh-CN": "好的开始; 具独创性; 有发展的; 新计划成功; 想像力丰富或有好点子; 有恋情发生; 拥有默契良好的伴侣; 有新恋人出现; 值得效仿的对象出现; 技能; 外交; 地址; 微妙; 自信; 意志 "
                           },
@@ -614,10 +865,35 @@
                             "zh-CN": "优柔寡断; 才能平庸; 有被欺诈的危险; 技术不足; 过于消极; 没有判断力; 缺乏创造力; 医师; 术士; 精神疾病; 耻辱; 不安 "
                           }
                         },
+                        "pktSymbolism": null,
                         "source": {
+                          "pkt": {
+                            "id": "PKT-1911",
+                            "title": "The Pictorial Key to the Tarot",
+                            "author": "Arthur Edward Waite",
+                            "illustrator": "Pamela Colman Smith",
+                            "edition": "1911",
+                            "url": "https://tarot-api.songhai.site/resources/pkt.txt",
+                            "sha256": "dd7e239c0e6dbe313550279359bf0ffc9d61c3e2d2389eeb706d409088ef2b69",
+                            "translationNote": "Chinese entries are editorial summaries of the cited English passages, not an original Waite translation.",
+                            "references": {
+                              "upright": {
+                                "chapter": "III.3",
+                                "lineStart": 1604,
+                                "lineEnd": 1604
+                              },
+                              "reversed": {
+                                "chapter": "III.3",
+                                "lineStart": 1604,
+                                "lineEnd": 1604
+                              }
+                            },
+                            "basis": "historical-divinatory-meanings",
+                            "modernExtensionSource": "Previous project-curated interpretation; not attributed to Waite."
+                          },
                           "dataset": "frankie-tarot-ground-truth",
-                          "datasetVersion": "350d0b7d530942dd",
-                          "note": "Project-curated data. Per-field source attribution has not been independently verified."
+                          "datasetVersion": "f4b3de1528456260",
+                          "note": "Primary meanings: cited PKT 1911 English passages and editorial Chinese summaries. modernMeanings: preserved project-curated extensions. Keywords, descriptions and artistic variants are project-curated; their attribution is not claimed to be independently verified."
                         }
                       }
                     },
@@ -636,9 +912,9 @@
                         "suit": null,
                         "rank": 2,
                         "imageUrls": {
-                          "redraw": "https://tarot-api.songhai.site/images/cards/maj02.webp?v=350d0b7d530942dd",
-                          "dreamy": "https://tarot-api.songhai.site/images/cards_dreamy/maj02.webp?v=350d0b7d530942dd",
-                          "original": "https://tarot-api.songhai.site/images/cards_rws_original/maj02.webp?v=350d0b7d530942dd"
+                          "redraw": "https://tarot-api.songhai.site/images/cards/maj02.webp?v=f4b3de1528456260",
+                          "dreamy": "https://tarot-api.songhai.site/images/cards_dreamy/maj02.webp?v=f4b3de1528456260",
+                          "original": "https://tarot-api.songhai.site/images/cards_rws_original/maj02.webp?v=f4b3de1528456260"
                         },
                         "keywords": {
                           "en": [
@@ -662,6 +938,16 @@
                         },
                         "meanings": {
                           "upright": {
+                            "en": "Secrets, mystery, the future as yet unrevealed; the woman who interests the Querent, if male; the Querent herself, if female; silence, tenacity; mystery, wisdom, science.",
+                            "zh-CN": "秘密、神秘、尚未揭示的未来、沉默、坚毅、智慧与知识；旧文也按求问者性别指本人或其关注的女子。"
+                          },
+                          "reversed": {
+                            "en": "Passion, moral or physical ardour, conceit, surface knowledge.",
+                            "zh-CN": "激情、精神或身体的热切、自负、浅薄知识。"
+                          }
+                        },
+                        "modernMeanings": {
+                          "upright": {
                             "en": "Intelligence and excellent judgment; insight and foresight; strong will to fight; calm leadership; luck in study, research, and spiritual matters; an independent woman; platonic love; a deeply connected spiritual friend; a cool or restrained romance; secrets; mystery; wisdom; science; silence; resilience",
                             "zh-CN": "知性、优秀的判断力; 具洞察力及先见之明; 强大的战斗意志; 冷静的统率力; 学问、研究等精神方面幸运; 独立自主的女性; 柏拉图式的爱情; 有心灵上交往至深的友人; 冷淡的恋情; 秘密; 奥秘; 智慧; 科学; 沉默; 坚韧 "
                           },
@@ -670,10 +956,35 @@
                             "zh-CN": "无知、缺乏理解力; 研究不足; 不理性的态度; 自我封闭; 神经质; 洁癖; 与女性朋友起争执; 对人冷淡; 晚婚或独身主义; 没有结果的单相思; 不孕; 激情; 道德或肉体上的热情; 自负; 表面知识 "
                           }
                         },
+                        "pktSymbolism": null,
                         "source": {
+                          "pkt": {
+                            "id": "PKT-1911",
+                            "title": "The Pictorial Key to the Tarot",
+                            "author": "Arthur Edward Waite",
+                            "illustrator": "Pamela Colman Smith",
+                            "edition": "1911",
+                            "url": "https://tarot-api.songhai.site/resources/pkt.txt",
+                            "sha256": "dd7e239c0e6dbe313550279359bf0ffc9d61c3e2d2389eeb706d409088ef2b69",
+                            "translationNote": "Chinese entries are editorial summaries of the cited English passages, not an original Waite translation.",
+                            "references": {
+                              "upright": {
+                                "chapter": "III.3",
+                                "lineStart": 1606,
+                                "lineEnd": 1606
+                              },
+                              "reversed": {
+                                "chapter": "III.3",
+                                "lineStart": 1606,
+                                "lineEnd": 1606
+                              }
+                            },
+                            "basis": "historical-divinatory-meanings",
+                            "modernExtensionSource": "Previous project-curated interpretation; not attributed to Waite."
+                          },
                           "dataset": "frankie-tarot-ground-truth",
-                          "datasetVersion": "350d0b7d530942dd",
-                          "note": "Project-curated data. Per-field source attribution has not been independently verified."
+                          "datasetVersion": "f4b3de1528456260",
+                          "note": "Primary meanings: cited PKT 1911 English passages and editorial Chinese summaries. modernMeanings: preserved project-curated extensions. Keywords, descriptions and artistic variants are project-curated; their attribution is not claimed to be independently verified."
                         }
                       }
                     }
@@ -832,6 +1143,92 @@
             ],
             "additionalProperties": false
           },
+          "modernMeanings": {
+            "type": "object",
+            "properties": {
+              "upright": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string"
+                  },
+                  "zh-CN": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "en",
+                  "zh-CN"
+                ],
+                "additionalProperties": false
+              },
+              "reversed": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string"
+                  },
+                  "zh-CN": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "en",
+                  "zh-CN"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "upright",
+              "reversed"
+            ],
+            "additionalProperties": false
+          },
+          "pktSymbolism": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string"
+                  },
+                  "reference": {
+                    "type": "object",
+                    "properties": {
+                      "chapter": {
+                        "type": "string"
+                      },
+                      "lineStart": {
+                        "type": "integer",
+                        "exclusiveMinimum": 0,
+                        "maximum": 9007199254740991
+                      },
+                      "lineEnd": {
+                        "type": "integer",
+                        "exclusiveMinimum": 0,
+                        "maximum": 9007199254740991
+                      }
+                    },
+                    "required": [
+                      "chapter",
+                      "lineStart",
+                      "lineEnd"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "en",
+                  "reference"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "source": {
             "type": "object",
             "properties": {
@@ -844,12 +1241,125 @@
               },
               "note": {
                 "type": "string"
+              },
+              "pkt": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "const": "PKT-1911"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "author": {
+                    "type": "string"
+                  },
+                  "illustrator": {
+                    "type": "string"
+                  },
+                  "edition": {
+                    "type": "string",
+                    "const": "1911"
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "translationNote": {
+                    "type": "string"
+                  },
+                  "basis": {
+                    "type": "string",
+                    "const": "historical-divinatory-meanings"
+                  },
+                  "modernExtensionSource": {
+                    "type": "string"
+                  },
+                  "references": {
+                    "type": "object",
+                    "properties": {
+                      "upright": {
+                        "type": "object",
+                        "properties": {
+                          "chapter": {
+                            "type": "string"
+                          },
+                          "lineStart": {
+                            "type": "integer",
+                            "exclusiveMinimum": 0,
+                            "maximum": 9007199254740991
+                          },
+                          "lineEnd": {
+                            "type": "integer",
+                            "exclusiveMinimum": 0,
+                            "maximum": 9007199254740991
+                          }
+                        },
+                        "required": [
+                          "chapter",
+                          "lineStart",
+                          "lineEnd"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "reversed": {
+                        "type": "object",
+                        "properties": {
+                          "chapter": {
+                            "type": "string"
+                          },
+                          "lineStart": {
+                            "type": "integer",
+                            "exclusiveMinimum": 0,
+                            "maximum": 9007199254740991
+                          },
+                          "lineEnd": {
+                            "type": "integer",
+                            "exclusiveMinimum": 0,
+                            "maximum": 9007199254740991
+                          }
+                        },
+                        "required": [
+                          "chapter",
+                          "lineStart",
+                          "lineEnd"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "upright",
+                      "reversed"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "id",
+                  "title",
+                  "author",
+                  "illustrator",
+                  "edition",
+                  "url",
+                  "sha256",
+                  "translationNote",
+                  "basis",
+                  "modernExtensionSource",
+                  "references"
+                ],
+                "additionalProperties": false
               }
             },
             "required": [
               "dataset",
               "datasetVersion",
-              "note"
+              "note",
+              "pkt"
             ],
             "additionalProperties": false
           }
@@ -865,6 +1375,8 @@
           "keywords",
           "description",
           "meanings",
+          "modernMeanings",
+          "pktSymbolism",
           "source"
         ],
         "additionalProperties": false
@@ -1083,6 +1595,379 @@
               "zh-CN"
             ],
             "additionalProperties": false
+          },
+          "interpretationProfile": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "templates": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string"
+                  },
+                  "zh-CN": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "en",
+                  "zh-CN"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "templates"
+            ],
+            "additionalProperties": false
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "pkt-adapted",
+                  "modern-extension"
+                ]
+              },
+              "label": {
+                "type": "string"
+              },
+              "references": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "chapter": {
+                      "type": "string"
+                    },
+                    "lineStart": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0,
+                      "maximum": 9007199254740991
+                    },
+                    "lineEnd": {
+                      "type": "integer",
+                      "exclusiveMinimum": 0,
+                      "maximum": 9007199254740991
+                    }
+                  },
+                  "required": [
+                    "chapter",
+                    "lineStart",
+                    "lineEnd"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "kind",
+              "label",
+              "references"
+            ],
+            "additionalProperties": false
+          },
+          "datasetVersion": {
+            "type": "string"
+          },
+          "legacyDefinition": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "names": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string"
+                  },
+                  "zh-CN": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "en",
+                  "zh-CN"
+                ],
+                "additionalProperties": false
+              },
+              "description": {
+                "type": "string"
+              },
+              "descriptions": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string"
+                  },
+                  "zh-CN": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "en",
+                  "zh-CN"
+                ],
+                "additionalProperties": false
+              },
+              "cardCount": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 78
+              },
+              "labels": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "labelsByLocale": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "zh-CN": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "en",
+                  "zh-CN"
+                ],
+                "additionalProperties": false
+              },
+              "cardPools": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "FULL",
+                    "MAJOR",
+                    "MINOR_PIP",
+                    "COURT",
+                    "SUIT_WANDS",
+                    "SUIT_CUPS",
+                    "SUIT_SWORDS",
+                    "SUIT_PENTACLES"
+                  ]
+                }
+              },
+              "layout": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "flex",
+                      "absolute"
+                    ]
+                  },
+                  "positions": {
+                    "anyOf": [
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "x": {
+                              "type": "number"
+                            },
+                            "y": {
+                              "type": "number"
+                            },
+                            "rotation": {
+                              "type": "number"
+                            },
+                            "zIndex": {
+                              "type": "number"
+                            },
+                            "labelPosition": {
+                              "type": "string",
+                              "enum": [
+                                "top",
+                                "bottom",
+                                "left",
+                                "right"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "x",
+                            "y"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "positions"
+                ],
+                "additionalProperties": false
+              },
+              "interpretationInstruction": {
+                "type": "string"
+              },
+              "interpretationInstructions": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "string"
+                  },
+                  "zh-CN": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "en",
+                  "zh-CN"
+                ],
+                "additionalProperties": false
+              },
+              "defaultQuestions": {
+                "type": "object",
+                "properties": {
+                  "en": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "zh-CN": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "en",
+                  "zh-CN"
+                ],
+                "additionalProperties": false
+              },
+              "interpretationProfile": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "templates": {
+                    "type": "object",
+                    "properties": {
+                      "en": {
+                        "type": "string"
+                      },
+                      "zh-CN": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "en",
+                      "zh-CN"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "id",
+                  "templates"
+                ],
+                "additionalProperties": false
+              },
+              "source": {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "pkt-adapted",
+                      "modern-extension"
+                    ]
+                  },
+                  "label": {
+                    "type": "string"
+                  },
+                  "references": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "chapter": {
+                          "type": "string"
+                        },
+                        "lineStart": {
+                          "type": "integer",
+                          "exclusiveMinimum": 0,
+                          "maximum": 9007199254740991
+                        },
+                        "lineEnd": {
+                          "type": "integer",
+                          "exclusiveMinimum": 0,
+                          "maximum": 9007199254740991
+                        }
+                      },
+                      "required": [
+                        "chapter",
+                        "lineStart",
+                        "lineEnd"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                },
+                "required": [
+                  "kind",
+                  "label",
+                  "references"
+                ],
+                "additionalProperties": false
+              },
+              "datasetVersion": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "names",
+              "description",
+              "descriptions",
+              "cardCount",
+              "labels",
+              "labelsByLocale",
+              "cardPools",
+              "layout",
+              "interpretationInstruction",
+              "interpretationInstructions",
+              "defaultQuestions",
+              "interpretationProfile",
+              "source",
+              "datasetVersion"
+            ],
+            "additionalProperties": false
           }
         },
         "required": [
@@ -1098,7 +1983,11 @@
           "layout",
           "interpretationInstruction",
           "interpretationInstructions",
-          "defaultQuestions"
+          "defaultQuestions",
+          "interpretationProfile",
+          "source",
+          "datasetVersion",
+          "legacyDefinition"
         ],
         "additionalProperties": false
       },
@@ -1240,7 +2129,7 @@
           },
           "service": {
             "type": "string",
-            "const": "franklin-tarot-api"
+            "const": "frankie-tarot-api"
           },
           "apiVersion": {
             "type": "string",

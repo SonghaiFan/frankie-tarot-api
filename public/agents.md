@@ -1,6 +1,6 @@
-# Franklin Tarot API — Agent guide
+# Frankie Tarot API — Agent guide
 
-This page is written for AI agents and the developers who connect them to Franklin. The API has no API-key requirement and is read-only.
+This page is written for AI agents and the developers who connect them to Frankie. The API has no API-key requirement and is read-only.
 
 - API base URL: `https://tarot-api.songhai.site`
 - OpenAPI schema: [`/openapi.json`](https://tarot-api.songhai.site/openapi.json)
@@ -10,11 +10,11 @@ This page is written for AI agents and the developers who connect them to Frankl
 
 ## Operating contract
 
-Franklin knows the cards and the spreads, and nothing else. It serves the 78-card catalog with bilingual meanings, and the spread definitions: positions, localized labels, interpretation guidance, and a card pool for each position.
+Frankie knows the cards and the spreads, and nothing else. It serves the 78-card catalog with bilingual meanings, and the spread definitions: positions, localized labels, interpretation guidance, and a card pool for each position.
 
 The independent Frankie Tarot app lets users manually choose their spread and cards, and owns orientation and reading state. Preserve that flow. The API's optional random-draw capability does not replace manual selection: call it only when the user explicitly delegates automatic drawing, for example, “Draw three cards for me automatically.” A request such as “What is my fortune this week?” alone is not permission to draw; ask how the user wants to choose cards.
 
-For an explicitly delegated automatic draw, Franklin returns one random card per position from that position's pool, never repeating a card. The calling application owns the question, consent, upright/reversed orientation, flow, and state. Franklin does not store or interpret readings.
+For an explicitly delegated automatic draw, Frankie returns one random card per position from that position's pool, never repeating a card. The calling application owns the question, consent, upright/reversed orientation, flow, and state. Frankie does not store or interpret readings.
 
 Use actual successful tool/API results for cards, meanings, spread positions, and image URLs. Use the first-party `imageUrls.redraw` returned on each card by default; choose another returned style only when requested. Do not invent or substitute cards or artwork when a call fails. Report the failure honestly. If inline images are unsupported by the client, provide the returned image link.
 
@@ -83,7 +83,7 @@ Errors use a JSON envelope such as `{ "error": { "code": "VALIDATION_ERROR", "me
 
 ---
 
-# Franklin Tarot API — Agent 接入指南
+# Frankie Tarot API — Agent 接入指南
 
 本文面向 AI Agent 及其接入开发者。API 无需密钥，且只读。
 
@@ -95,11 +95,11 @@ Errors use a JSON envelope such as `{ "error": { "code": "VALIDATION_ERROR", "me
 
 ## 服务边界
 
-Franklin 只知道牌和牌阵：提供 78 张牌的中英文牌义，以及牌阵定义，包括位置、本地化标签、解读指引和每个位置的牌池。
+Frankie 只知道牌和牌阵：提供 78 张牌的中英文牌义，以及牌阵定义，包括位置、本地化标签、解读指引和每个位置的牌池。
 
 独立的 Frankie Tarot 应用让用户手动选择牌阵和卡牌，并负责正逆位及牌局状态。应保留这一流程。API 的随机抽牌只是可选能力：只有用户明确委托自动抽牌（如“请自动帮我抽三张牌”）时才调用。“我这周运势如何？”本身不代表同意自动抽牌，应先询问用户如何选择卡牌。
 
-用户明确委托自动抽牌后，Franklin 可按牌阵每个位置的牌池随机抽一张，同一局不重复。用户的问题、抽牌意愿、正逆位、流程和状态仍由调用方负责。Franklin 不保存牌局，也不做解读。
+用户明确委托自动抽牌后，Frankie 可按牌阵每个位置的牌池随机抽一张，同一局不重复。用户的问题、抽牌意愿、正逆位、流程和状态仍由调用方负责。Frankie 不保存牌局，也不做解读。
 
 卡牌、牌义、牌阵位置及图片链接必须来自实际成功返回的结果。图片默认使用返回的第一方 `imageUrls.redraw`；只有用户要求时才选其他已返回的风格。调用失败时如实说明，不得编造抽牌结果或替换为无关图片。客户端无法显示图片时，提供返回的图片链接。
 
@@ -165,3 +165,7 @@ API/协议测试不代表模型会正确选择工具或客户端会显示图片�
 ## 错误
 
 错误采用如下 JSON 结构：`{ "error": { "code": "VALIDATION_ERROR", "message": "...", "details": [] } }`。`400` 表示输入格式错误，应修正请求，不要原样重复。`404` 表示端点、卡牌 ID 或牌阵 ID 不存在。`405` 表示 REST 路由使用了 `GET`/`OPTIONS` 以外的方法。MCP 工具失败也可能返回 `isError: true` 和文本说明，使用结果前应先检查错误。
+
+## PKT interpretation references
+
+Card `meanings` are the cited PKT 1911 English passages and editorial Chinese summaries; `modernMeanings` preserve the prior project-curated extension. Respect each orientation's `source.pkt.references`, including Two of Cups reversed from III.4. Keywords, descriptions and artwork remain project-curated and are not claimed to be exact quotations. Request `revision=pkt-1911-v1` consistently when listing or drawing corrected PKT-adapted spreads; omitted revision retains legacy semantics. Preserve the returned definition and actual cards with each reading. Treat historical descriptions as symbolic/historical evidence, never diagnoses, certain predictions or grounds for stereotyping a person.

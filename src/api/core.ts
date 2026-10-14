@@ -50,10 +50,13 @@ export function getCard(cardId: string, locale: ApiLocale, origin: string) {
       upright: { en: source.meanings.upright.en ?? "", "zh-CN": source.meanings.upright["zh-CN"] ?? "" },
       reversed: { en: source.meanings.reversed.en ?? "", "zh-CN": source.meanings.reversed["zh-CN"] ?? "" },
     },
+    modernMeanings: source.modernMeanings,
+    pktSymbolism: source.pktSymbolism ?? null,
     source: {
+      pkt: source.meaningSource,
       dataset: "frankie-tarot-ground-truth",
       datasetVersion: DATASET_VERSION,
-      note: "Project-curated data. Per-field source attribution has not been independently verified.",
+      note: "Primary meanings: cited PKT 1911 English passages and editorial Chinese summaries. modernMeanings: preserved project-curated extensions. Keywords, descriptions and artistic variants are project-curated; their attribution is not claimed to be independently verified.",
     },
   };
 }
@@ -97,30 +100,32 @@ export function randomCards(query: RandomCardsQuery, origin: string, random: (ma
   return { cards: ids.slice(0, query.n).map((id) => getCard(id, query.locale, origin)!), locale: query.locale };
 }
 
-export function listSpreads(locale: ApiLocale) {
-  return SPREAD_IDS.map((id) => {
-    const spread = data.spreads.byId[id];
-    const labels = (spread.layout.type === "absolute" ? spread.layout.positionLabels : spread.layout.labels)[locale] ?? [];
-    const constraints = spread.cardPools ?? Array.from({ length: spread.cardCount }, () => "FULL");
-    return {
-      id,
-      name: localeText(spread.name, locale),
-      names: spread.name,
-      description: localeText(spread.description, locale),
-      descriptions: spread.description,
-      cardCount: spread.cardCount,
-      labels,
-      labelsByLocale: spread.layout.type === "absolute" ? spread.layout.positionLabels : spread.layout.labels,
-      cardPools: constraints,
-      layout: {
-        type: spread.layout.type,
-        positions: spread.layout.positions,
-      },
-      interpretationInstruction: localeText(spread.interpretationInstruction, locale),
-      interpretationInstructions: spread.interpretationInstruction,
-      defaultQuestions: spread.defaultQuestions ?? { en: [], "zh-CN": [] },
-    };
-  });
+function formatSpread(id: string, spread: any, locale: ApiLocale, version: string, legacy = false) {
+  const labels = (spread.layout.type === "absolute" ? spread.layout.positionLabels : spread.layout.labels)[locale] ?? [];
+  return {
+    id, name: localeText(spread.name, locale), names: spread.name,
+    description: localeText(spread.description, locale), descriptions: spread.description,
+    cardCount: spread.cardCount, labels,
+    labelsByLocale: spread.layout.type === "absolute" ? spread.layout.positionLabels : spread.layout.labels,
+    cardPools: spread.cardPools ?? Array.from({ length: spread.cardCount }, () => "FULL"),
+    layout: { type: spread.layout.type, positions: spread.layout.positions },
+    interpretationInstruction: localeText(spread.interpretationInstruction, locale),
+    interpretationInstructions: spread.interpretationInstruction,
+    interpretationProfile: data.interpretationProfiles[legacy ? "legacy" : "current"],
+    source: spread.interpretationSource ?? {kind: "modern-extension", label: "Legacy project-curated spread semantics, retained for existing readings.", references: []},
+    datasetVersion: version,
+    defaultQuestions: spread.defaultQuestions ?? { en: [], "zh-CN": [] },
+  };
+}
+
+export const spreadRevisionSchema = z.enum(["legacy", "pkt-1911-v1"]).default("legacy");
+export type SpreadRevision = z.infer<typeof spreadRevisionSchema>;
+
+export function listSpreads(locale: ApiLocale, revision: SpreadRevision = "legacy") {
+  return SPREAD_IDS.map((id) => ({
+    ...formatSpread(id, revision === "legacy" ? data.legacySpreads[id] : data.spreads.byId[id], locale, revision === "legacy" ? data.legacyDatasetVersion : DATASET_VERSION, revision === "legacy"),
+    legacyDefinition: formatSpread(id, data.legacySpreads[id], locale, data.legacyDatasetVersion, true),
+  }));
 }
 
 type Card = NonNullable<ReturnType<typeof getCard>>;
@@ -140,8 +145,8 @@ export function isInPool(card: Card, pool: string) {
 }
 
 /** One random card per position from that position's pool, never repeating a card. Orientation belongs to the caller. */
-export function drawSpread(spreadId: string, locale: ApiLocale, origin: string, random: (max: number) => number = randomInt) {
-  const spread = listSpreads(locale).find((item) => item.id === spreadId);
+export function drawSpread(spreadId: string, locale: ApiLocale, origin: string, random: (max: number) => number = randomInt, revision: SpreadRevision = "legacy") {
+  const spread = listSpreads(locale, revision).find((item) => item.id === spreadId);
   if (!spread) return undefined;
   const deck = CARD_IDS.map((id) => getCard(id, locale, origin)!);
   const used = new Set<string>();

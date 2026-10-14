@@ -15,7 +15,7 @@ Keep PR #2 as the single integration PR and merge PR #1's ancestry into its bran
 | Website copy and migration requirements | Retain PR #1's bilingual copy and conditions for any future server-draw migration; retain legacy-route exclusions |
 | Tests | Keep all PR #1 API tests and all PR #2 contract tests; overlapping schema and semantic assertions remain useful independent coverage |
 
-The draw algorithm, card dataset, REST catalog payload construction and HTTP MCP transport are unchanged from main. This change does not edit Frankie or move its manual selection to Franklin.
+The draw algorithm, card dataset, REST catalog payload construction and HTTP MCP transport are unchanged from main. This change does not edit Frankie or move its manual selection to Frankie.
 
 ## Verification performed on the integrated tree
 

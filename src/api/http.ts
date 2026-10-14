@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { API_VERSION, drawSpread, getCard, listCards, listCardsQuerySchema, listSpreads, randomCards, randomCardsQuerySchema } from "./core";
+import { API_VERSION, drawSpread, getCard, listCards, listCardsQuerySchema, listSpreads, spreadRevisionSchema, randomCards, randomCardsQuerySchema } from "./core";
 import openApiDocument from "../../public/openapi.json";
 
 const cors = {
@@ -20,7 +20,7 @@ export async function handleTarotApi(request: Request): Promise<Response> {
   const url = new URL(request.url);
   const origin = url.origin;
   const path = url.pathname.replace(/\/+$/, "") || "/";
-  if (path === "/health" && request.method === "GET") return json({ status: "ok", service: "franklin-tarot-api", apiVersion: API_VERSION });
+  if (path === "/health" && request.method === "GET") return json({ status: "ok", service: "frankie-tarot-api", apiVersion: API_VERSION });
   if (path === "/openapi.json" && request.method === "GET") return json(openApiDocument, 200, { "Cache-Control": "public, max-age=300" });
   if (request.method === "GET" && path === "/api/v1/cards") {
     const parsed = listCardsQuerySchema.safeParse(Object.fromEntries(url.searchParams));
@@ -45,7 +45,9 @@ export async function handleTarotApi(request: Request): Promise<Response> {
   if (request.method === "GET" && path === "/api/v1/spreads") {
     const locale = z.enum(["en", "zh-CN"]).safeParse(url.searchParams.get("locale") ?? "zh-CN");
     if (!locale.success) return bad(400, "VALIDATION_ERROR", "locale must be en or zh-CN.");
-    return json({ spreads: listSpreads(locale.data), locale: locale.data });
+    const revision = spreadRevisionSchema.safeParse(url.searchParams.get("revision") ?? undefined);
+    if (!revision.success) return bad(400, "VALIDATION_ERROR", "revision must be legacy or pkt-1911-v1.");
+    return json({ spreads: listSpreads(locale.data, revision.data), locale: locale.data });
   }
   const drawMatch = path.match(/^\/api\/v1\/spreads\/([^/]+)\/draw$/);
   if (request.method === "GET" && drawMatch) {
@@ -53,7 +55,9 @@ export async function handleTarotApi(request: Request): Promise<Response> {
     if (!locale.success) return bad(400, "VALIDATION_ERROR", "locale must be en or zh-CN.");
     let spreadId: string;
     try { spreadId = decodeURIComponent(drawMatch[1]); } catch { return bad(400, "INVALID_SPREAD_ID", "Spread ID is not valid URL encoding."); }
-    const draw = drawSpread(spreadId, locale.data, origin);
+    const revision = spreadRevisionSchema.safeParse(url.searchParams.get("revision") ?? undefined);
+    if (!revision.success) return bad(400, "VALIDATION_ERROR", "revision must be legacy or pkt-1911-v1.");
+    const draw = drawSpread(spreadId, locale.data, origin, undefined, revision.data);
     return draw ? json(draw, 200, { "Cache-Control": "no-store" }) : bad(404, "SPREAD_NOT_FOUND", `No spread exists with ID '${drawMatch[1]}'.`);
   }
   if (/^\/api\/v1(?:\/|$)/.test(path)) {

@@ -29,7 +29,7 @@ const server = createServer(async (incoming, outgoing) => {
         }
         return;
       }
-      const brandAsset = pathname.match(/^\/(franklin|favicon)\.svg$/);
+      const brandAsset = pathname.match(/^\/(frankie|franklin|favicon)\.svg$/);
       if (incoming.method === "GET" && brandAsset) {
         try {
           const bytes = await readFile(join(process.cwd(), "dist", `${brandAsset[1]}.svg`));
@@ -78,4 +78,4 @@ const server = createServer(async (incoming, outgoing) => {
     }
   });
 });
-server.listen(port, "127.0.0.1", () => console.log(`Franklin Tarot API listening at http://127.0.0.1:${port}`));
+server.listen(port, "127.0.0.1", () => console.log(`Frankie Tarot API listening at http://127.0.0.1:${port}`));

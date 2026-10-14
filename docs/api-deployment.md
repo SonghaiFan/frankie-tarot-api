@@ -1,6 +1,6 @@
 # Deployment
 
-One repository, one Vercel project (`franklin-tarot-api`), one public origin: `https://tarot-api.songhai.site`.
+One repository, one Vercel project (`frankie-tarot-api`), one public origin: `https://tarot-api.songhai.site`.
 
 - `/`: developer documentation and live examples.
 - `/api/v1/*`: REST API.

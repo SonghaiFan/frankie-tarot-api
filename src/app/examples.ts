@@ -47,7 +47,7 @@ const reading = draw.cards.map(({ positionLabel, card }) => {
 
     health: {
       request: `curl "${API_BASE}/health"`,
-      response: `{ "status": "ok", "service": "franklin-tarot-api", "apiVersion": "1" }`,
+      response: `{ "status": "ok", "service": "frankie-tarot-api", "apiVersion": "1" }`,
     },
 
     card: {
@@ -165,7 +165,7 @@ cache-control: public, max-age=31536000, immutable`,
 
     mcpConfig: `{
   "mcpServers": {
-    "franklin-tarot": { "type": "http", "url": "${API_BASE}/mcp/agent" }
+    "frankie-tarot": { "type": "http", "url": "${API_BASE}/mcp/agent" }
   }
 }`,
 
