@@ -2,6 +2,8 @@
 
 # Frankie Tarot API
 
+[English](README.md) · [简体中文](README.zh-CN.md)
+
 Read-only tarot data for applications and agents, with bilingual cards, spread definitions and optional draws.
 
 [API docs](https://tarot-api.songhai.site/) · [OpenAPI](https://tarot-api.songhai.site/openapi.json) · [Agent MCP](https://tarot-api.songhai.site/mcp/agent) · [Guide](docs/guide.md) · [Run locally](#run-locally)
