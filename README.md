@@ -1,3 +1,5 @@
+![Frankie Tarot API — current product banner](docs/readme/banner.png)
+
 # Frankie Tarot API
 
 Read-only tarot data and draws for applications and AI agents: 78 bilingual cards (English and Simplified Chinese), 11 spread definitions with positions and card pools, and random spread draws. REST and the UI-free Agent MCP share one service implementation. Your app decides orientation and owns the reading; the service has no database and no model API dependency.
@@ -15,7 +17,26 @@ Read-only tarot data and draws for applications and AI agents: 78 bilingual card
 
 > 这个项目正在快速迭代，并将永久免费开源。如果你已经下载或正在使用，欢迎 **Star** 收藏项目，并 [**Follow @SonghaiFan**](https://github.com/SonghaiFan) 关注后续项目动态。你的 Star 是对我最大的支持，也是我持续开发的最大动力。
 
-## Quick start
+## Features
+
+- Retrieve 78 bilingual cards and 11 spread definitions over REST.
+- Use the UI-free MCP service and generated OpenAPI schema.
+- Request optional random draws only when the calling user explicitly delegates drawing.
+
+## Getting started
+
+```sh
+npm ci
+npm run api            # REST and MCP at http://127.0.0.1:3001
+```
+
+```sh
+curl "http://127.0.0.1:3001/api/v1/spreads?locale=en"
+```
+
+## Project notes
+
+### Quick start
 
 Load the deck and the spreads once.
 
@@ -52,7 +73,7 @@ const reading = draw.cards.map(({ positionLabel, card }) => {
 // ]
 ```
 
-## REST endpoints
+### REST endpoints
 
 | Endpoint | Returns |
 | --- | --- |
@@ -64,7 +85,7 @@ const reading = draw.cards.map(({ positionLabel, card }) => {
 | `GET /health` | `{ "status": "ok", "service": "frankie-tarot-api", "apiVersion": "1" }` |
 | `GET /openapi.json` | OpenAPI 3.1 schema |
 
-### Get one card
+#### Get one card
 
 Card IDs are stable: `maj00`–`maj21` for the major arcana, and `wandsNN`, `cupsNN`, `swordsNN`, `pentsNN` (`01`–`14`) for the minor arcana.
 
@@ -113,7 +134,7 @@ curl "https://tarot-api.songhai.site/api/v1/cards/cups12?locale=zh-CN"
   "arcana": "MINOR", "suit": "CUPS", "rank": 12, … }
 ```
 
-### List or search cards
+#### List or search cards
 
 With no filters, returns all 78 cards in catalog order. `q` searches names, keywords, descriptions and meanings in the requested locale; `arcana` and `suit` narrow the result. There is no pagination.
 
@@ -133,7 +154,7 @@ curl "https://tarot-api.songhai.site/api/v1/cards?arcana=MAJOR&locale=en"  # 22 
 }
 ```
 
-### Random cards
+#### Random cards
 
 `n` distinct cards in random order (1–78, default 1). Cards carry no orientation: your app decides upright or reversed. Responses are not cached.
 
@@ -153,7 +174,7 @@ curl "https://tarot-api.songhai.site/api/v1/cards/random?n=3&locale=en"
 }
 ```
 
-### Spreads
+#### Spreads
 
 ```sh
 curl "https://tarot-api.songhai.site/api/v1/spreads?locale=en"
@@ -205,7 +226,7 @@ The 11 spreads and their pools:
 | `RELATION` | 11 | `FULL` × 11 |
 | `YEARLY` | 15 | `FULL` × 15 |
 
-### Draw a spread
+#### Draw a spread
 
 One random card per position, taken from that position's card pool, never repeating a card. Cards carry no orientation: your app decides upright or reversed. Responses are not cached; an unknown spread ID returns `404 SPREAD_NOT_FOUND`.
 
@@ -230,7 +251,7 @@ Server draws are intended for other API consumers and AI agents whose users expl
 
 Each call is a fresh random sample (it may coincidentally match a previous sample). There is no public seed, idempotency key, reading ID or recovery endpoint. Do not automatically retry a draw as if it were the same reading. Persist a successful response and caller-chosen orientations; after an uncertain failure, explain that another call is a new draw and require an explicit retry decision. `positionIndex` is one-based and follows the spread's labels and pools; preserve that order when saving or presenting results.
 
-### Card pools
+#### Card pools
 
 | Pool | Cards |
 | --- | --- |
@@ -240,7 +261,7 @@ Each call is a fresh random sample (it may coincidentally match a previous sampl
 | `COURT` | Minor arcana with `rank` 11–14: Page, Knight, Queen, King (16 cards) |
 | `SUIT_WANDS`, `SUIT_CUPS`, `SUIT_SWORDS`, `SUIT_PENTACLES` | All 14 cards whose `suit` matches |
 
-### Images
+#### Images
 
 Every card has three artwork styles in `imageUrls`, as WebP served from the API origin. Use the actual returned `imageUrls.redraw` by default; use another returned style only when requested. Do not construct replacement URLs or substitute unrelated artwork. Images allow any origin (`Access-Control-Allow-Origin: *`) and are cached for a year as immutable; the `?v=` version currently hashes card data, not image bytes. An artwork-only change therefore needs a separate cache-busting version strategy before release.
 
@@ -248,7 +269,7 @@ Every card has three artwork styles in `imageUrls`, as WebP served from the API 
 <img src="https://tarot-api.songhai.site/images/cards/maj00.webp?v=350d0b7d530942dd" alt="The Fool">
 ```
 
-### Errors
+#### Errors
 
 Errors share one envelope with a stable `code`:
 
@@ -274,7 +295,7 @@ curl "https://tarot-api.songhai.site/api/v1/cards/random?n=0"
 | `404` | `NOT_FOUND` | No route matches |
 | `405` | `METHOD_NOT_ALLOWED` | Any method other than `GET`/`OPTIONS` on REST routes |
 
-## Agent MCP
+### Agent MCP
 
 `https://tarot-api.songhai.site/mcp/agent` is a stateless Streamable HTTP MCP server with the same data as REST.
 
@@ -313,7 +334,7 @@ curl https://tarot-api.songhai.site/mcp/agent \
 
 `npm run mcp:agent` runs the same server over stdio.
 
-### Agent behavior
+#### Agent behavior
 
 - Use actual successful REST/MCP results for card IDs, meanings, position labels, spread definitions, and artwork. Clearly distinguish your interpretation from the returned reference data
 - Interpret only after an explicit user request; opening the table or drawing cards alone does not request interpretation
@@ -321,7 +342,7 @@ curl https://tarot-api.songhai.site/mcp/agent \
 - If the user asks to repeat or explain an existing draw, reuse the prior result and orientation. Calling a random endpoint again creates a new draw
 - If a call fails, is unavailable, or returns an error, say so. Do not invent cards, positions, meanings, or image URLs and present them as tool results
 
-### Manual client evaluation checklist
+#### Manual client evaluation checklist
 
 Protocol/schema tests establish API behavior; they do not establish whether a particular model selects tools correctly or renders images. Evaluate each connected client/model separately and record its version, actual tool calls, and observed output. Until that evaluation is run, model selection and image presentation remain unverified.
 
@@ -331,22 +352,19 @@ Protocol/schema tests establish API behavior; they do not establish whether a pa
 - Ask to show the same draw again and verify no new random call occurs
 - Test an unknown card ID and an unavailable connection; verify an honest failure message without fabricated results
 
-## Contract maintenance
+### Contract maintenance
 
 `src/api/contracts.ts` defines shared Zod response schemas for MCP and OpenAPI. After changing a contract or example, run `npm run openapi:generate` and commit the updated `public/openapi.json`. `npm run api:test` rejects stale generated documentation and validates REST/MCP results against the schemas. REST single-card responses remain unwrapped.
 
-## Run locally
+### Data and interpretation
 
-```sh
-npm ci
-npm run api            # REST and MCP at http://127.0.0.1:3001
-```
+The deck contains project-curated English and Simplified Chinese descriptions and upright/reversed meanings. Per-field attribution has **not** been independently verified; the entire dataset should not be represented as a verbatim historical source. Each card response reports the dataset version and this attribution boundary.
 
-```sh
-curl "http://127.0.0.1:3001/api/v1/spreads?locale=en"
-```
+Tarot supplies material for symbolic reflection, not factual prediction. The service returns structured meanings and positions; applications and agents choose how to present an interpretation.
 
-## Build, test and deploy
+牌义包含项目整理的中英文描述及正逆位解释，尚未逐字段核实来源。服务提供反思材料，不对现实结果作确定性预测。
+
+## Development
 
 ```sh
 npm run api:test
@@ -363,13 +381,7 @@ The independent [Frankie Tarot app](https://github.com/SonghaiFan/frankie-tarot)
 
 Only the v1 API and stable card IDs are supported.
 
-## Data and interpretation
-
-The deck contains project-curated English and Simplified Chinese descriptions and upright/reversed meanings. Per-field attribution has **not** been independently verified; the entire dataset should not be represented as a verbatim historical source. Each card response reports the dataset version and this attribution boundary.
-
-Tarot supplies material for symbolic reflection, not factual prediction. The service returns structured meanings and positions; applications and agents choose how to present an interpretation.
-
-牌义包含项目整理的中英文描述及正逆位解释，尚未逐字段核实来源。服务提供反思材料，不对现实结果作确定性预测。
+Banner sources and update instructions: [README artwork](docs/readme/README.md).
 
 ## License
 

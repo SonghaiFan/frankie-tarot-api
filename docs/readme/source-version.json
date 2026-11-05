@@ -1,0 +1,14 @@
+{
+  "repository": "frankie-tarot-api",
+  "source_commit": "bb14096693267b36791cbe82dded7478fd1ef32d",
+  "captured_on": "2026-11-05",
+  "source_state": "Current local working tree; existing uncommitted app edits were included where present.",
+  "materials": [
+    {
+      "file": "assets/ui.png",
+      "kind": "current local app screenshot",
+      "note": "Current API documentation hero and actual card examples.",
+      "captured_on": "2026-11-05"
+    }
+  ]
+}

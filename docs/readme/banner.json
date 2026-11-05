@@ -1,0 +1,31 @@
+{
+  "title": "Tarot API",
+  "tagline": "Tarot data for apps and agents.",
+  "category": "API / Cards and spreads",
+  "layout": "screenshot",
+  "assets": [
+    {
+      "src": "assets/ui.png",
+      "fit": "contain",
+      "crop": [
+        430,
+        122,
+        1135,
+        624
+      ],
+      "source_size": [
+        1720,
+        1223
+      ]
+    }
+  ],
+  "signature": "assets/frankie.svg",
+  "provenance": [
+    {
+      "file": "assets/ui.png",
+      "kind": "current local app screenshot",
+      "note": "Current API documentation hero and actual card examples.",
+      "captured_on": "2026-11-05"
+    }
+  ]
+}
