@@ -1,0 +1,49 @@
+{
+  "repository": "SonghaiFan/frankie-tarot-api",
+  "branch": "main",
+  "pages_url": "https://songhaifan.github.io/frankie-tarot-api/",
+  "kind": "api",
+  "app_url": null,
+  "vercel_project": null,
+  "accent": "#926642",
+  "tint": "#faf6ed",
+  "category": {
+    "en": "Data / API + MCP",
+    "zh": "数据 / API + MCP"
+  },
+  "steps": {
+    "en": [
+      "Read the API contracts and spread definitions.",
+      "Connect your app over REST or your agent over MCP.",
+      "Keep orientation and interpretation in the calling app."
+    ],
+    "zh": [
+      "阅读 API 约定与牌阵定义。",
+      "通过 REST 连接应用，或通过 MCP 连接智能体。",
+      "由调用方应用管理正逆位与解读。"
+    ]
+  },
+  "media": [
+    {
+      "src": "docs/readme/assets/ui.png",
+      "caption": {
+        "en": "Current product interface and original assets.",
+        "zh": "项目真实界面或原始素材。"
+      },
+      "crop": [
+        430,
+        122,
+        1135,
+        624
+      ],
+      "source_size": [
+        1720,
+        1223
+      ]
+    }
+  ],
+  "art_note": {
+    "en": "Current product interface and original assets.",
+    "zh": "素材来自项目当前界面与原始资源。"
+  }
+}

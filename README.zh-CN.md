@@ -6,7 +6,7 @@
 
 面向应用与智能体的只读塔罗数据服务，提供双语牌义、牌阵定义与可选的抽牌功能。
 
-[API 文档](https://tarot-api.songhai.site/) · [OpenAPI](https://tarot-api.songhai.site/openapi.json) · [智能体 MCP](https://tarot-api.songhai.site/mcp/agent) · [项目指南](docs/guide.md) · [本地运行](#本地运行)
+[介绍页](https://songhaifan.github.io/frankie-tarot-api/zh/) · [API 文档](https://tarot-api.songhai.site/) · [OpenAPI](https://tarot-api.songhai.site/openapi.json) · [智能体 MCP](https://tarot-api.songhai.site/mcp/agent) · [项目指南](docs/guide.md) · [本地运行](#本地运行)
 
 ## 可以做什么
 
