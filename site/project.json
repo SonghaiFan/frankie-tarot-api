@@ -5,8 +5,8 @@
   "kind": "api",
   "app_url": null,
   "vercel_project": null,
-  "accent": "#926642",
-  "tint": "#faf6ed",
+  "accent": "#f0ede8",
+  "tint": "#030308",
   "category": {
     "en": "Data / API + MCP",
     "zh": "数据 / API + MCP"
@@ -25,21 +25,20 @@
   },
   "media": [
     {
-      "src": "docs/readme/assets/ui.png",
+      "src": "site/assets/docs-current.png",
       "caption": {
-        "en": "Current product interface and original assets.",
-        "zh": "项目真实界面或原始素材。"
+        "en": "The actual API reference.",
+        "zh": "真实 API 参考文档。"
       },
-      "crop": [
-        430,
-        122,
-        1135,
-        624
-      ],
-      "source_size": [
-        1720,
-        1223
-      ]
+      "captured_on": "2026-11-06"
+    },
+    {
+      "src": "site/assets/spreads-current.png",
+      "caption": {
+        "en": "Current spread definitions and layouts.",
+        "zh": "当前牌阵定义与布局。"
+      },
+      "captured_on": "2026-11-06"
     }
   ],
   "art_note": {

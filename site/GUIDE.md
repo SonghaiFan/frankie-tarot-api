@@ -1,46 +1,68 @@
-# Introduction page maintenance / 介绍页维护
+# Tarot API introduction maintenance / 介绍页维护
 
-[English README](../README.md) · [中文 README](../README.zh-CN.md)
+This is a separate, static English-first introduction. The existing service and full reference at `https://tarot-api.songhai.site/` remain independent. / 这里是独立的静态双语介绍页；API 与完整文档继续由原服务提供。
 
-## Two destinations / 两个入口
+## Content and contracts / 内容与约定
 
-- Introduction / 介绍页: https://songhaifan.github.io/frankie-tarot-api/
-- App / 应用: No browser app deployment. Follow the local/native/API guide.
-- The introduction is a standalone static site. It never builds the app or reads environment files. / 介绍页独立构建，不构建应用，也不读取环境变量文件。
-- English is the default; `zh/` is the Chinese version. / 英文默认，中文位于 `zh/`。
+Edit English and Chinese copy together in `site/content.json`. `site/build.py` renders `/` and `/zh/` without Node dependencies or environment files. Keep `#use` and `#start` stable. / 同时更新中英文文案，保留现有锚点。
 
-## Files to update / 更新哪些文件
+The build derives the card count, drawable spread count, fixed Fool fields and four demonstration definitions from `src/data/tarot.json`. It extracts registered tool names from `mcp/agent.ts`. The spread explorer is an unsaved adaptation of `src/app/SpreadLayout.tsx`; it does not draw cards or fetch a reading. If a demonstration ID disappears, update the explicit ID list in `site/build.py` and test it rather than substituting invented data.
 
-| Source / 来源 | What it shows / 内容 |
+构建时从真实数据提取牌数、牌阵数、固定愚人示例与四种牌阵定义；MCP 名称来自实际注册源码。示例仅展示定义，不抽牌、不发送解读请求。
+
+Recheck these owning files when behavior changes:
+
+| Change | Recheck |
 | --- | --- |
-| `docs/readme/assets/ui.png` | Current product interface and original assets. |
+| Card fields, search, image paths, locale defaults, pools and revisions | `src/api/core.ts`, `src/data/tarot.json` |
+| REST routes, CORS and errors | `src/api/http.ts`, `src/api/openapi.ts`, `public/openapi.json` |
+| Tool names, parameters, draw delegation and response envelopes | `mcp/agent.ts`, `src/api/contracts.ts` |
+| HTTP sessions and MCP endpoint | `mcp/agent-http.ts`, `scripts/api-server.ts` |
+| Relative card diagrams and white-frame card silhouette | `src/app/SpreadLayout.tsx`, `TarotCard.tsx` |
+| Actual reference palette/type | `src/app/index.css`, `ApiDocsPage.tsx` |
 
-- `../README.md` and `../README.zh-CN.md`: product introduction, features, setup, limitations and developer commands. Update both languages together. / 同步维护双语介绍、功能、运行步骤与限制。
-- `project.json`: app URL, repository, category, colors, three user steps and the ordered media list. / 应用链接、仓库、分类、颜色、使用步骤与有序素材列表。
-- `style.css`: this app's visual treatment within the shared layout. / 统一结构下的项目视觉风格。
-- `build.py`: portable standard-library renderer. / 可独立使用的 Python 标准库构建器。
+Do not describe historical/editorial/project-curated fields as one undifferentiated source. The public API currently defaults to `legacy` spread definitions; show the explicit `pkt-1911-v1` parameter when explaining the newer definitions. Keep caller-owned orientation, saved readings, explicit draw choice and uncertain-retry behavior accurate. No public seed or recovery endpoint exists.
 
-## Replacing screenshots and GIFs / 替换截图和动图
+不要将历史原文、中文编辑摘要与项目延伸释义混为一谈；牌阵版本、正逆位、保存、抽牌选择与重试语义应按源码核对。
 
-1. Run the current app and capture real, settled UI. Use synthetic or guest data; hide credentials and private content. For GIFs, record a real interaction from start to finish, rather than animating a static screenshot. / 运行当前版本，使用访客或示例数据采集稳定画面；GIF 应录制真实操作，不把静态图伪装成操作录像。
-2. Replace the corresponding source file above when its screen changes. These banner assets are shared with the README; replacing them may update both the banner and this page. Keep `docs/readme/source-version.json` and banner provenance accurate. / 界面变化后替换对应文件；共享素材会同时影响 banner，需同步更新来源记录。
-3. For a new screen or GIF, add it under `site/assets/` and add an entry to `project.json` → `media` with `src`, bilingual `caption`, and optionally `captured_on` / `source_revision`. The first item is the hero; the full list is the gallery. Use a GIF's first frame as an informative resting frame, keep files small, and provide a still alternative. / 新素材放到 `site/assets/`，登记双语说明、采集时间和版本；第一项为主图，其余进入画廊。GIF 应有可读首帧并保留静态替代图。
-4. If app behavior changes, update both READMEs and both `steps` arrays. Native screenshots and shared family artwork must be labelled honestly. / 行为变化时同步更新双语 README 和使用步骤；区分原生截图与系列共享素材。
-5. Build and inspect desktop and mobile, in both languages. Check the app link and every image. / 构建后检查桌面、手机和两种语言，验证链接与所有图片。
+## Assets to replace / 需要更换的素材
+
+| Asset | Replace when |
+| --- | --- |
+| `site/assets/docs-current.png` | Reference header, overview, card presentation or navigation changes |
+| `site/assets/spreads-current.png` | Spread section, layouts, labels or ordering changes |
+| `public/images/cards/maj00.webp` | The real redraw Fool art changes; copied as `media/fool.webp` |
+| `docs/readme/assets/frankie.svg` | Approved signature changes |
+| `docs/readme/banner.png` | Approved banner changes; copied for Open Graph |
+
+Capture actual settled pages at the current live reference, in English with harmless catalog data. Scroll to the spread reference for the second image. Do not call random endpoints merely to create an illustration; a fixed card lookup and spread definitions are sufficient. Keep full screenshots; crop only with CSS if needed. Add screenshot filenames to the build copy list and captions to both languages.
+
+从线上真实文档截取稳定后的界面，不需要账号或私人信息。不要为截图而自动抽牌；固定查询与牌阵定义已经足够。图片文件、构建复制列表与双语说明需要同步。
+
+The design intentionally follows the actual API reference: `#030308`, light text, thin borders, restrained controls and the 7:12 white-framed card. Its dark identity takes precedence over imposing a generic light template. `site/style.css` contains the intro layout; avoid adding a visual system that conflicts with the current reference.
+
+## Build and check / 构建与检查
 
 ```sh
 python3 site/build.py
 python3 -m http.server 8080 --directory _site --bind 127.0.0.1
+node --check site/explorer.js
 ```
 
-Open http://127.0.0.1:8080/ and http://127.0.0.1:8080/zh/.
+Open English and Chinese at desktop and 390px width. Select all four demonstration spreads and both revisions. Court must show three position/pool pairs; Celtic Cross must show ten. Check that changing revision changes the actual labels, images load, code blocks scroll within their box, links work and keyboard focus is visible. The diagram depicts relative positions, not chosen cards or an interpreted result.
 
-## Publishing / 发布
+检查四种牌阵、两种版本、宫廷三位置与凯尔特十字十位置，双语手机布局、图片、代码块、链接与键盘焦点。示意图不是抽牌结果。
 
-Push the reviewed page changes to `main`. `.github/workflows/pages.yml` publishes only `_site/` to GitHub Pages. App deployment remains separate on Vercel for browser apps; API services and native/local apps retain their own runtime. Never include `.env` files or unrelated work in a page commit. / 推送审核后的页面改动到 `main`，工作流只发布 `_site/`；应用与 API 的部署分别管理，勿提交环境变量文件或其他未完成代码。
+Safe service smoke checks, with no key or draw:
 
-If the branch or repository owner changes, update `project.json`, the workflow branch and README introduction links. / 分支或仓库所有者变化时，同步修改配置、工作流与介绍页链接。
+```sh
+curl 'https://tarot-api.songhai.site/health'
+curl 'https://tarot-api.songhai.site/api/v1/cards/maj00?locale=en'
+curl 'https://tarot-api.songhai.site/api/v1/spreads?locale=en&revision=pkt-1911-v1'
+```
 
-## App signature / 应用签名
+These do not test every MCP or API operation. Full service changes use the repository's existing contract tests and deployment guide; this introduction build does not deploy the API.
 
-The app signature uses `public/frankie-signature.svg`, copied from the approved `docs/readme/assets/frankie.svg`. It links to this introduction page. / 应用签名使用已确认的系列 SVG，并链接到介绍页。
+## Publish / 发布
+
+Commit reviewed `site/` files and relevant `.github/workflows/pages.yml` changes only. Push `main`; the existing Pages workflow builds `_site`. Source data, MCP tool registration, the Fool art and banner paths also trigger rebuilding. Never add environment files, credentials or unrelated code. / 仅提交本次介绍页与相关构建路径，不包含密钥、环境文件或其他未完成修改。

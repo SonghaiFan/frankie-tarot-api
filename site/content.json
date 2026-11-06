@@ -1,0 +1,184 @@
+{
+  "en": {
+    "headline": "Tarot data.\nYour reading.",
+    "intro": "Build card-driven apps with bilingual references, artwork and spread layouts. Connect over REST or MCP.",
+    "open": "Read the API reference",
+    "nav": [
+      "The service",
+      "First integration",
+      "Screens"
+    ],
+    "concept_title": "The catalog is one part of a reading.",
+    "concept": "Frankie returns structured card references and spread definitions. Your interface chooses the question, cards, upright or reversed orientation, interpretation and saved state.",
+    "features": [
+      [
+        "A bilingual card catalog",
+        "Retrieve names, keywords, descriptions, upright and reversed meanings, three artwork URLs and source details. Stable IDs such as maj00 identify the same card across languages."
+      ],
+      [
+        "Layouts with a purpose",
+        "Each spread supplies its card count, ordered position labels and any per-position card pool. The Court spread, for example, asks for a pip card, a court card and a major arcana card."
+      ],
+      [
+        "The same data for an agent",
+        "Five UI-free MCP tools expose search, lookup, spread definitions and optional draws. The service does not call a language model or produce a personalized interpretation."
+      ]
+    ],
+    "explorer_title": "Explore a definition, without drawing.",
+    "explorer_note": "This small adaptation of the real SpreadLayout component uses the current source dataset. The numbered shapes are positions, not selected cards. Nothing is sent or saved.",
+    "spread": "Spread",
+    "revision": "Definition revision",
+    "current": "PKT-adapted revision",
+    "legacy": "Legacy (API default)",
+    "positions": "Positions in API order",
+    "pool": "Pool",
+    "request_title": "Start with a known card.",
+    "request_note": "A deterministic lookup is a useful first request. This abbreviated example uses real catalog fields; the live response also contains meanings, artwork URLs and provenance.",
+    "revision_title": "Pin the definition you used.",
+    "revision_note": "Omitting revision keeps legacy spread semantics for existing clients. Request revision=pkt-1911-v1 for the current PKT-adapted definitions, including corrected Celtic Cross positions. Retain the returned definition with a reading rather than silently replacing its labels later.",
+    "workflow_title": "Your first integration",
+    "steps": [
+      [
+        "Load the references",
+        "Fetch cards and spreads in en or zh-CN. The default locale is zh-CN; the catalog has no pagination. No service API key is required."
+      ],
+      [
+        "Keep manual choice in your app",
+        "Let the user select a spread and cards, then look up those IDs. The independent Frankie Tarot app provides the interactive table; this service provides its references."
+      ],
+      [
+        "Use automatic draws only by choice",
+        "The optional random-card and spread-draw endpoints create a new sample. Draw only after the user explicitly delegates that action. A reading topic alone does not choose cards for them."
+      ],
+      [
+        "Retain the successful result",
+        "Save card IDs, positions, orientation and the exact definition in the caller. There is no public seed, idempotency key or recovery endpoint; an uncertain retry is a new draw."
+      ]
+    ],
+    "mcp_title": "REST for apps. MCP for tools.",
+    "mcp": "REST offers read-only GET endpoints with CORS. Agent MCP uses Streamable HTTP at /mcp/agent and returns structured content. It is a tool service, not a ChatGPT visual widget or an account system.",
+    "tools_title": "Registered tools",
+    "screens_title": "Inside the current reference",
+    "captions": [
+      "The live reference, with original card artwork and request examples.",
+      "The real spread reference and numbered position layouts."
+    ],
+    "boundaries_title": "Know what the reference means.",
+    "boundaries": [
+      [
+        "Source layers stay visible",
+        "Primary meanings carry cited PKT 1911 English passages and editorial Chinese summaries. modernMeanings preserves project-curated extensions; artistic variants, keywords and descriptions are also curated. Read provenance rather than assuming every field is a historical quotation."
+      ],
+      [
+        "No hidden reading database",
+        "The service has no database or model API dependency. Reading history, recovery, consent, interpretation and orientation belong to the caller. Symbolic meanings are not factual predictions or probabilities."
+      ],
+      [
+        "Structured failures",
+        "Invalid queries return 400, unknown cards or spreads return 404, and unsupported REST API methods return 405. Handle the error response rather than inventing a successful result."
+      ]
+    ],
+    "run": "Run the service locally",
+    "run_note": "REST and Agent MCP run at http://127.0.0.1:3001. The separate Vite command edits the full API reference; a static server alone does not run the service.",
+    "guide": "Screenshot & contract update guide",
+    "source": "Source code",
+    "footer": "A Frankie project by Songhai Fan",
+    "skip": "Skip to content",
+    "card_caption": "The Fool, from the actual redraw artwork. This is a fixed catalog example, not a draw.",
+    "api_docs": "Full reference",
+    "openapi": "OpenAPI schema",
+    "agentguide": "Agent guide",
+    "tarot_app": "Explore the Tarot app"
+  },
+  "zh": {
+    "headline": "塔罗数据，\n解读由你决定。",
+    "intro": "用双语牌义、原始牌图与牌阵布局构建应用，通过 REST 或 MCP 接入。",
+    "open": "阅读 API 文档",
+    "nav": [
+      "了解服务",
+      "首次接入",
+      "真实文档"
+    ],
+    "concept_title": "牌库，是一次解读的其中一部分。",
+    "concept": "Frankie 返回结构化的牌面参考与牌阵定义。问题、选牌、正逆位、解读与保存状态，由调用方界面负责。",
+    "features": [
+      [
+        "双语牌面资料",
+        "获取名称、关键词、描述、正逆位牌义、三种牌图 URL 与来源信息。maj00 这样的稳定 ID，在不同语言中仍指向同一张牌。"
+      ],
+      [
+        "带有位置语义的布局",
+        "每个牌阵提供牌数、有序位置标签与各位置的牌池。例如宫廷行为模式依次使用点数牌、宫廷牌与大阿卡纳。"
+      ],
+      [
+        "智能体也使用相同数据",
+        "五个无 UI 的 MCP 工具提供检索、查询、牌阵定义与可选抽牌。服务本身不调用语言模型，也不生成个性化解读。"
+      ]
+    ],
+    "explorer_title": "先了解定义，不必抽牌。",
+    "explorer_note": "这个小示例改编自真实的 SpreadLayout 组件，使用当前源码数据。编号图形表示位置，并非已经选出的牌；不会发送请求或保存记录。",
+    "spread": "牌阵",
+    "revision": "定义版本",
+    "current": "PKT 改编版本",
+    "legacy": "旧版（API 默认）",
+    "positions": "按 API 顺序排列的位置",
+    "pool": "牌池",
+    "request_title": "从一张确定的牌开始。",
+    "request_note": "确定性的牌面查询适合作为第一条请求。这个节选示例使用真实牌库字段；完整响应还包括牌义、牌图 URL 与来源。",
+    "revision_title": "保留当时使用的定义。",
+    "revision_note": "省略 revision 时，服务沿用旧版牌阵语义，兼容已有调用方。指定 revision=pkt-1911-v1 可使用当前 PKT 改编定义，包括修正后的凯尔特十字位置。应随解读保存返回的定义，不要事后悄悄替换位置标签。",
+    "workflow_title": "第一次接入",
+    "steps": [
+      [
+        "加载参考数据",
+        "选择 en 或 zh-CN 获取牌库与牌阵，默认语言为 zh-CN。牌库不分页，公共服务无需 API key。"
+      ],
+      [
+        "在应用中保留手动选择",
+        "让用户选择牌阵与牌，再按 ID 查询。独立的 Frankie Tarot 应用提供交互牌桌，这个服务提供参考数据。"
+      ],
+      [
+        "明确选择后，再自动抽牌",
+        "可选的随机牌与牌阵抽牌接口，每次都会生成新样本。只有用户明确委托自动抽牌时才调用；只提出一个问题，并不等于同意代选卡牌。"
+      ],
+      [
+        "保存成功返回的结果",
+        "调用方保存牌 ID、位置、正逆位与准确的牌阵定义。没有公开种子、幂等键或恢复接口；结果不确定时再次请求，会是新一次抽牌。"
+      ]
+    ],
+    "mcp_title": "应用用 REST，工具用 MCP。",
+    "mcp": "REST 提供带 CORS 的只读 GET 接口。Agent MCP 通过 /mcp/agent 的 Streamable HTTP 返回结构化内容；它是工具服务，不是 ChatGPT 可视化组件或账号系统。",
+    "tools_title": "已注册的工具",
+    "screens_title": "当前的完整参考文档",
+    "captions": [
+      "线上真实文档，包含原始牌图与请求示例。",
+      "真实的牌阵参考与编号位置布局。"
+    ],
+    "boundaries_title": "理解资料，也理解边界。",
+    "boundaries": [
+      [
+        "来源层次保持可见",
+        "主要牌义附有 PKT 1911 英文引文出处与中文编辑摘要。modernMeanings 保留项目整理的延伸解释，图像变体、关键词与描述同样经过项目编辑；不能把所有字段都视为历史原文。"
+      ],
+      [
+        "没有隐藏的解读数据库",
+        "服务没有数据库或模型 API 依赖。历史、恢复、用户选择、解读与正逆位由调用方管理；象征性牌义不是事实预测或概率。"
+      ],
+      [
+        "处理结构化错误",
+        "不合法查询返回 400，不存在的牌或牌阵返回 404，不支持的 REST 方法返回 405。应处理错误响应，不能编造成功结果。"
+      ]
+    ],
+    "run": "在本地运行服务",
+    "run_note": "REST 与 Agent MCP 位于 http://127.0.0.1:3001。独立的 Vite 命令用于编辑完整文档；只启动静态文件服务器，并不会运行服务。",
+    "guide": "截图与接口约定更新指南",
+    "source": "源代码",
+    "footer": "Songhai Fan 的 Frankie 系列项目",
+    "skip": "跳至内容",
+    "card_caption": "真实重绘牌图中的愚人。这是固定牌库示例，不是抽牌结果。",
+    "api_docs": "完整文档",
+    "openapi": "OpenAPI 约定",
+    "agentguide": "智能体指南",
+    "tarot_app": "了解 Tarot 应用"
+  }
+}
