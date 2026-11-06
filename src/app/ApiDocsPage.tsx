@@ -367,7 +367,7 @@ export default function ApiDocsPage() {
           </section>
 
           <footer className="flex flex-col gap-4 border-t border-white/10 pt-8 text-[9px] font-light uppercase tracking-[0.3em] text-neutral-600 sm:flex-row sm:items-center sm:justify-between">
-            <span>Frankie · MIT License</span>
+            <span className="inline-flex items-center gap-3"><a href="https://songhaifan.github.io/frankie-tarot-api/" aria-label="About Frankie tarot api" style={{ display: "inline-flex", alignItems: "center", padding: "6px", color: "inherit",  }}><span aria-hidden="true" style={{ display: "block", width: 76, height: 26, backgroundColor: "currentColor", mask: "url(/frankie-signature.svg) center / contain no-repeat", WebkitMask: "url(/frankie-signature.svg) center / contain no-repeat" }} /></a><span>MIT License</span></span>
             <span>{copy.footer[0]}</span>
             <a className="inline-flex items-center gap-1.5 transition-colors duration-300 hover:text-white" href="https://github.com/SonghaiFan/frankie-tarot-api">{copy.footer[1]} <ArrowUpRight size={13} strokeWidth={1.5} /></a>
           </footer>
